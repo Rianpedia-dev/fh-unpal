@@ -45,7 +45,7 @@
     "browserslist": "^4.28.1",
     "enhanced-resolve": "^5.19.0",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "15.1.6",
     "shadcn": "^3.8.5"
   }
 }

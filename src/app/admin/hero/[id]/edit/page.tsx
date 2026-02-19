@@ -5,8 +5,9 @@ import { updateHeroSlide } from "../../../actions/hero";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 
-export default function EditHeroPage({ params }: { params: { id: string } }) {
-    const slide = getHeroSlideById(Number(params.id));
+export default async function EditHeroPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const slide = getHeroSlideById(Number(id));
 
     if (!slide) {
         notFound();
