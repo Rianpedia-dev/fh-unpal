@@ -42,4 +42,6 @@ next-env.d.ts
 
 # database
 sqlite.db
+sqlite.db-shm
+sqlite.db-wal
 /drizzle
