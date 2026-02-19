@@ -88,7 +88,12 @@ export function getProfileValue(key: string): string {
 }
 
 export function getAllProfile() {
-    return db.select().from(schema.profile).all();
+    try {
+        return db.select().from(schema.profile).all();
+    } catch (e) {
+        console.error("Failed to get all profile:", e);
+        return [];
+    }
 }
 
 export function getFullProfile() {
@@ -101,7 +106,14 @@ export function getFullProfile() {
     return {
         sejarah: map["sejarah"] ?? "",
         visi: map["visi"] ?? "",
-        misi: JSON.parse(map["misi"] ?? "[]") as string[],
+        misi: (() => {
+            try {
+                return JSON.parse(map["misi"] ?? "[]") as string[];
+            } catch (e) {
+                console.error("Failed to parse misi:", e);
+                return [];
+            }
+        })(),
         akreditasi: {
             grade: map["akreditasi_grade"] ?? "",
             sk: map["akreditasi_sk"] ?? "",
@@ -143,10 +155,14 @@ export interface SiteConfig {
 }
 
 export function getFullSiteConfig(): SiteConfig {
-    const rows = db.select().from(schema.siteConfig).all();
     const map: Record<string, string> = {};
-    for (const row of rows) {
-        map[row.key] = row.value;
+    try {
+        const rows = db.select().from(schema.siteConfig).all();
+        for (const row of rows) {
+            map[row.key] = row.value;
+        }
+    } catch (e) {
+        console.error("Failed to get full site config:", e);
     }
 
     return {
@@ -188,7 +204,12 @@ export function getDashboardCounts() {
 // HERO SLIDER
 // ============================================================
 export function getHeroSlides() {
-    return db.select().from(schema.heroSlides).orderBy(asc(schema.heroSlides.order)).all();
+    try {
+        return db.select().from(schema.heroSlides).orderBy(asc(schema.heroSlides.order)).all();
+    } catch (e) {
+        console.error("Failed to get hero slides:", e);
+        return [];
+    }
 }
 
 export function getHeroSlideById(id: number) {
@@ -199,13 +220,22 @@ export function getHeroSlideById(id: number) {
 // SITE STATS / VISITOR COUNTER
 // ============================================================
 export function incrementViews() {
-    return db.run(
-        sql`UPDATE site_stats SET views = views + 1 WHERE id = 1`
-    );
+    try {
+        return db.run(
+            sql`UPDATE site_stats SET views = views + 1 WHERE id = 1`
+        );
+    } catch (e) {
+        console.error("Failed to increment views:", e);
+    }
 }
 
 export function getViews(): number {
-    const row = db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1)).get();
-    return row?.views ?? 0;
+    try {
+        const row = db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1)).get();
+        return row?.views ?? 0;
+    } catch (e) {
+        console.error("Failed to get views:", e);
+        return 0;
+    }
 }
 

@@ -274,7 +274,7 @@ Fakultas Hukum UNPAL terus berkembang dengan meningkatkan kualitas kurikulum, fa
     },
 
     strukturOrganisasi: {
-        dekan: "Prof. Dr. H. xxxxxxx S.H., M.H.",
+        dekan: "Prof. Dr. H. xxxxxxxx S.H., M.H.",
         wakil1: "Dr. Hj. Siti Nurhaliza, S.H., M.Hum.",
         wakil2: "Dr. Muhammad Ridwan, S.H., M.H.",
         kaprodi: "Dr. Hj. Rahmawati, S.H., M.H.",
