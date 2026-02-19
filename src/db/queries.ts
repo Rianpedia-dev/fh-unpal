@@ -1,6 +1,6 @@
 import { db } from "./index";
 import * as schema from "./schema";
-import { eq, asc } from "drizzle-orm";
+import { eq, asc, sql } from "drizzle-orm";
 
 // ============================================================
 // PENGUMUMAN
@@ -194,3 +194,18 @@ export function getHeroSlides() {
 export function getHeroSlideById(id: number) {
     return db.select().from(schema.heroSlides).where(eq(schema.heroSlides.id, id)).get();
 }
+
+// ============================================================
+// SITE STATS / VISITOR COUNTER
+// ============================================================
+export function incrementViews() {
+    return db.run(
+        sql`UPDATE site_stats SET views = views + 1 WHERE id = 1`
+    );
+}
+
+export function getViews(): number {
+    const row = db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1)).get();
+    return row?.views ?? 0;
+}
+

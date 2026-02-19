@@ -7,10 +7,12 @@ import { type SiteConfig } from "@/db/queries";
 
 export default function PublicLayout({
     children,
-    siteConfig
+    siteConfig,
+    visitorCount
 }: {
     children: React.ReactNode;
     siteConfig: SiteConfig;
+    visitorCount: number;
 }) {
     const pathname = usePathname();
     const isAdmin = pathname.startsWith("/admin");
@@ -23,7 +25,7 @@ export default function PublicLayout({
         <div className="flex min-h-screen flex-col">
             <Navbar siteConfig={siteConfig} />
             <main className="flex-1">{children}</main>
-            <Footer siteConfig={siteConfig} />
+            <Footer siteConfig={siteConfig} visitorCount={visitorCount} />
         </div>
     );
 }

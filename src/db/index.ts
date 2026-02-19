@@ -90,6 +90,12 @@ sqlite.exec(`
     image_url TEXT,
     "order" INTEGER DEFAULT 0
   );
+  CREATE TABLE IF NOT EXISTS site_stats (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    views INTEGER NOT NULL DEFAULT 0
+  );
+  -- Ensure there is at least one row in site_stats
+  INSERT OR IGNORE INTO site_stats (id, views) VALUES (1, 0);
 `);
 
 export const db = drizzle(sqlite, { schema });

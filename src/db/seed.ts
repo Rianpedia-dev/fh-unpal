@@ -29,6 +29,7 @@ async function seed() {
 
     // 1. Announcements
     console.log("📢 Seeding announcements...");
+    db.delete(schema.announcements).run();
     for (const item of announcementsData) {
         db.insert(schema.announcements)
             .values({
@@ -43,6 +44,7 @@ async function seed() {
 
     // 2. Lecturers
     console.log("👨‍🏫 Seeding lecturers...");
+    db.delete(schema.lecturers).run();
     for (const item of lecturersData) {
         db.insert(schema.lecturers)
             .values({
@@ -58,6 +60,7 @@ async function seed() {
 
     // 3. Staff
     console.log("👤 Seeding staff...");
+    db.delete(schema.staff).run();
     for (const item of staffMembers) {
         db.insert(schema.staff)
             .values({
@@ -70,6 +73,7 @@ async function seed() {
 
     // 4. Organizations
     console.log("🏛️ Seeding organizations...");
+    db.delete(schema.organizations).run();
     for (const item of orgsData) {
         db.insert(schema.organizations)
             .values({
@@ -82,6 +86,7 @@ async function seed() {
 
     // 5. Gallery
     console.log("🖼️ Seeding gallery...");
+    db.delete(schema.gallery).run();
     for (const item of galleryItems) {
         db.insert(schema.gallery)
             .values({
@@ -95,6 +100,7 @@ async function seed() {
 
     // 6. PMB Timeline
     console.log("📋 Seeding PMB timeline...");
+    db.delete(schema.pmbTimeline).run();
     for (const item of timelineData) {
         db.insert(schema.pmbTimeline)
             .values({
@@ -108,6 +114,7 @@ async function seed() {
 
     // 7. Tuition Fees
     console.log("💰 Seeding tuition fees...");
+    db.delete(schema.tuitionFees).run();
     for (const item of feesData) {
         db.insert(schema.tuitionFees)
             .values({
@@ -136,7 +143,13 @@ async function seed() {
         { key: "struktur_katuTataUsaha", value: profileData.strukturOrganisasi.katuTataUsaha },
     ];
     for (const entry of profileEntries) {
-        db.insert(schema.profile).values(entry).run();
+        db.insert(schema.profile)
+            .values(entry)
+            .onConflictDoUpdate({
+                target: schema.profile.key,
+                set: { value: entry.value }
+            })
+            .run();
     }
 
     // 9. Site Config (key-value)
@@ -154,8 +167,21 @@ async function seed() {
         { key: "youtube", value: siteConfigData.socialMedia.youtube },
     ];
     for (const entry of configEntries) {
-        db.insert(schema.siteConfig).values(entry).run();
+        db.insert(schema.siteConfig)
+            .values(entry)
+            .onConflictDoUpdate({
+                target: schema.siteConfig.key,
+                set: { value: entry.value }
+            })
+            .run();
     }
+
+    // 10. Default Stat
+    console.log("📊 Seeding site stats...");
+    db.insert(schema.siteStats)
+        .values({ id: 1, views: 0 })
+        .onConflictDoNothing()
+        .run();
 
     console.log("\n✅ Seeding selesai!");
     sqlite.close();

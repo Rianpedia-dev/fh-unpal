@@ -122,3 +122,12 @@ export const heroSlides = sqliteTable("hero_slides", {
     imageUrl: text("image_url"),
     order: integer("order").default(0),
 });
+
+// ============================================================
+// SITE STATS (Misalnya: Jumlah Pengunjung)
+// ============================================================
+export const siteStats = sqliteTable("site_stats", {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    views: integer("views").default(0).notNull(),
+});
+

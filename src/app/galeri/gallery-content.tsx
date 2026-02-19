@@ -56,7 +56,7 @@ export default function GalleryContent({ items }: { items: GalleryItem[] }) {
                                 onClick={() => setActiveFilter(cat)}
                                 className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${activeFilter === cat
                                     ? "bg-brand-navy text-white shadow-md shadow-brand-navy/20"
-                                    : "bg-slate-50 text-muted-foreground hover:bg-slate-100 hover:text-brand-navy"
+                                    : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
                                     }`}
                             >
                                 {cat}
@@ -67,7 +67,7 @@ export default function GalleryContent({ items }: { items: GalleryItem[] }) {
                     {/* Gallery Grid */}
                     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {filteredItems.map((item) => (
-                            <Card key={item.id} className="group card-premium overflow-hidden border-0 shadow-sm hover:shadow-xl bg-white">
+                            <Card key={item.id} className="group card-premium overflow-hidden border-0 shadow-sm hover:shadow-xl bg-card">
                                 {/* Image Placeholder */}
                                 <div className="relative aspect-[4/3] bg-gradient-to-br from-brand-navy/10 via-brand-navy/5 to-brand-red/5 flex items-center justify-center overflow-hidden">
                                     {item.imageUrl ? (
@@ -99,7 +99,7 @@ export default function GalleryContent({ items }: { items: GalleryItem[] }) {
                                     </div>
                                 </div>
                                 <CardContent className="pt-4 pb-4">
-                                    <h3 className="font-bold text-sm leading-snug text-brand-navy group-hover:text-brand-red transition-colors">
+                                    <h3 className="font-bold text-sm leading-snug text-foreground group-hover:text-brand-red transition-colors">
                                         {item.title}
                                     </h3>
                                     <p className="text-xs text-muted-foreground mt-1.5">{item.date}</p>

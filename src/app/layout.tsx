@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import PublicLayout from "@/components/layout/public-layout";
-import { getFullSiteConfig } from "@/db/queries";
+import { ThemeProvider } from "@/components/theme-provider";
+import { getFullSiteConfig, getViews, incrementViews } from "@/db/queries";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,14 +32,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Increment visitor count on each request (Server Component)
+  try {
+    incrementViews();
+  } catch (e) {
+    console.error("Failed to increment views:", e);
+  }
+
   const siteConfig = getFullSiteConfig();
+  const visitorCount = getViews();
 
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <PublicLayout siteConfig={siteConfig}>{children}</PublicLayout>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <PublicLayout siteConfig={siteConfig} visitorCount={visitorCount}>
+            {children}
+          </PublicLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
+
 

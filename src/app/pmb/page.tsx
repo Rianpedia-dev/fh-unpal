@@ -58,7 +58,7 @@ export default function PMBPage() {
                             <span className="text-sm font-semibold text-brand-red uppercase tracking-wider">Langkah-Langkah</span>
                             <span className="h-1 w-8 rounded-full bg-brand-red" />
                         </div>
-                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-brand-navy">Alur Pendaftaran</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">Alur Pendaftaran</h2>
                         <p className="text-muted-foreground mt-3 max-w-lg mx-auto">Ikuti langkah berikut untuk mendaftar di Fakultas Hukum UNPAL.</p>
                     </div>
 
@@ -76,12 +76,12 @@ export default function PMBPage() {
                                     </div>
 
                                     {/* Content */}
-                                    <Card className="flex-1 card-premium border-0 shadow-sm hover:shadow-xl bg-white overflow-hidden">
+                                    <Card className="flex-1 card-premium border-0 shadow-sm hover:shadow-xl bg-card overflow-hidden">
                                         <div className="h-0.5 bg-gradient-to-r from-brand-red to-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                         <CardContent className="pt-5 pb-5">
                                             <div className="flex items-start justify-between gap-4 mb-2">
-                                                <h3 className="font-bold text-brand-navy">{item.title}</h3>
-                                                <Badge variant="outline" className="shrink-0 text-xs border-brand-navy/20 text-brand-navy">
+                                                <h3 className="font-bold text-foreground">{item.title}</h3>
+                                                <Badge variant="outline" className="shrink-0 text-xs border-foreground/20 text-foreground">
                                                     <Clock className="mr-1 h-3 w-3" />
                                                     {item.period}
                                                 </Badge>
@@ -97,13 +97,13 @@ export default function PMBPage() {
             </section>
 
             {/* ============ BIAYA KULIAH ============ */}
-            <section className="py-20 sm:py-24 bg-gradient-to-br from-slate-50 to-white">
+            <section className="py-20 sm:py-24 bg-muted/30">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-14">
-                        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy mb-4">
+                        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 text-foreground mb-4">
                             <DollarSign className="h-7 w-7" />
                         </div>
-                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-brand-navy">Biaya Kuliah</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">Biaya Kuliah</h2>
                         <p className="text-muted-foreground mt-3">Rincian biaya pendidikan di Fakultas Hukum UNPAL.</p>
                     </div>
 
@@ -123,7 +123,7 @@ export default function PMBPage() {
                                         </thead>
                                         <tbody>
                                             {tuitionFees.map((fee, i) => (
-                                                <tr key={i} className="border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors">
+                                                <tr key={i} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
                                                     <td className="py-4 px-5 font-medium">{fee.component}</td>
                                                     <td className="py-4 px-5 text-right font-bold text-brand-red">{fee.amount}</td>
                                                     <td className="py-4 px-5 text-right text-muted-foreground">{fee.note}</td>
@@ -145,7 +145,7 @@ export default function PMBPage() {
                         <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-red/10 text-brand-red mb-4">
                             <CalendarDays className="h-7 w-7" />
                         </div>
-                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-brand-navy">Jadwal Seleksi</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">Jadwal Seleksi</h2>
                         <p className="text-muted-foreground mt-3">Jadwal penting PMB tahun akademik 2026/2027.</p>
                     </div>
 
@@ -158,17 +158,17 @@ export default function PMBPage() {
                             { title: "Pengumuman Hasil", date: "Agustus 2026", status: "Menunggu" },
                             { title: "Daftar Ulang", date: "Agustus — September 2026", status: "Menunggu" },
                         ].map((item, i) => (
-                            <Card key={i} className="card-premium border-0 shadow-sm hover:shadow-xl bg-white overflow-hidden group">
+                            <Card key={i} className="card-premium border-0 shadow-sm hover:shadow-xl bg-card overflow-hidden group">
                                 <div className="h-1 bg-gradient-to-r from-brand-red to-red-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                 <CardContent className="pt-5 pb-5">
                                     <div className="flex items-start justify-between gap-2 mb-3">
-                                        <h3 className="font-bold text-sm text-brand-navy">{item.title}</h3>
+                                        <h3 className="font-bold text-sm text-foreground">{item.title}</h3>
                                         <Badge
                                             className={`text-xs shrink-0 ${item.status === "Dibuka"
                                                 ? "bg-brand-red text-white"
                                                 : item.status === "Segera"
                                                     ? "bg-brand-gold/20 text-brand-gold border-brand-gold/30"
-                                                    : "bg-slate-100 text-muted-foreground"
+                                                    : "bg-muted text-muted-foreground"
                                                 }`}
                                         >
                                             {item.status}

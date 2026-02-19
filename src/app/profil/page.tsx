@@ -36,7 +36,7 @@ export default function ProfilPage() {
             <section className="py-14 sm:py-20">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <Tabs defaultValue="sejarah" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto gap-1.5 bg-slate-50 p-1.5 rounded-xl">
+                        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto gap-1.5 bg-muted p-1.5 rounded-xl">
                             <TabsTrigger value="sejarah" className="gap-2 py-3 rounded-lg data-[state=active]:bg-brand-navy data-[state=active]:text-white data-[state=active]:shadow-md">
                                 <BookOpen className="h-4 w-4 hidden sm:inline-block" />
                                 Sejarah
@@ -59,7 +59,7 @@ export default function ProfilPage() {
                         <TabsContent value="sejarah" className="mt-8">
                             <Card className="border-0 shadow-md">
                                 <CardContent className="pt-8 sm:pt-10">
-                                    <h2 className="text-2xl font-bold text-brand-navy mb-6 red-accent-line pb-3">Sejarah Fakultas Hukum</h2>
+                                    <h2 className="text-2xl font-bold text-foreground mb-6 red-accent-line pb-3">Sejarah Fakultas Hukum</h2>
                                     <div className="max-w-none">
                                         {profileData.sejarah.split("\n\n").map((paragraph, i) => (
                                             <p key={i} className="text-muted-foreground leading-relaxed mb-5 last:mb-0 text-[15px]">
@@ -90,7 +90,7 @@ export default function ProfilPage() {
 
                                 <Card className="border-0 shadow-md">
                                     <CardContent className="pt-8 sm:pt-10">
-                                        <h2 className="text-xl font-bold text-brand-navy mb-5">Misi</h2>
+                                        <h2 className="text-xl font-bold text-foreground mb-5">Misi</h2>
                                         <ol className="space-y-4">
                                             {profileData.misi.map((item, i) => (
                                                 <li key={i} className="flex gap-3">
@@ -110,7 +110,7 @@ export default function ProfilPage() {
                         <TabsContent value="struktur" className="mt-8">
                             <Card className="border-0 shadow-md">
                                 <CardContent className="pt-8 sm:pt-10">
-                                    <h2 className="text-2xl font-bold text-brand-navy mb-8 red-accent-line pb-3">Struktur Organisasi</h2>
+                                    <h2 className="text-2xl font-bold text-foreground mb-8 red-accent-line pb-3">Struktur Organisasi</h2>
                                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                         {[
                                             { title: "Dekan", name: profileData.strukturOrganisasi.dekan, highlight: true },
@@ -120,12 +120,12 @@ export default function ProfilPage() {
                                             { title: "Sekretaris Program Studi", name: profileData.strukturOrganisasi.sekretarisProdi },
                                             { title: "Kepala Tata Usaha", name: profileData.strukturOrganisasi.katuTataUsaha },
                                         ].map((item, i) => (
-                                            <Card key={i} className={`card-premium ${item.highlight ? 'border-brand-red/20 bg-brand-red/3 shadow-sm' : 'bg-slate-50 border-0'}`}>
+                                            <Card key={i} className={`card-premium ${item.highlight ? 'border-brand-red/20 bg-brand-red/3 shadow-sm' : 'bg-muted border-0'}`}>
                                                 <CardContent className="pt-5 pb-5">
                                                     <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">
                                                         {item.title}
                                                     </p>
-                                                    <p className="font-bold text-sm text-brand-navy">{item.name}</p>
+                                                    <p className="font-bold text-sm text-foreground">{item.name}</p>
                                                     {item.highlight && <div className="h-0.5 w-10 bg-brand-red rounded mt-3" />}
                                                 </CardContent>
                                             </Card>
@@ -147,17 +147,17 @@ export default function ProfilPage() {
                                             </div>
                                         </div>
                                         <div className="space-y-4">
-                                            <h2 className="text-2xl font-bold text-brand-navy">Akreditasi Program Studi</h2>
+                                            <h2 className="text-2xl font-bold text-foreground">Akreditasi Program Studi</h2>
                                             <p className="text-muted-foreground leading-relaxed text-[15px]">
                                                 {profileData.akreditasi.description}
                                             </p>
                                             <div className="flex flex-col sm:flex-row gap-4 text-sm pt-2">
-                                                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-50">
+                                                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-muted">
                                                     <CheckCircle2 className="h-4 w-4 text-brand-red" />
                                                     <span className="text-muted-foreground">{profileData.akreditasi.sk}</span>
                                                 </div>
-                                                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-50">
-                                                    <span className="font-semibold text-brand-navy">Berlaku:</span>
+                                                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-muted">
+                                                    <span className="font-semibold text-foreground">Berlaku:</span>
                                                     <span className="text-muted-foreground">{profileData.akreditasi.validUntil}</span>
                                                 </div>
                                             </div>
