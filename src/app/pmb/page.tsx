@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     description: "Informasi Penerimaan Mahasiswa Baru (PMB) Fakultas Hukum Universitas Palembang.",
 };
 
-export default function PMBPage() {
-    const pmbTimeline = getPmbTimeline();
-    const tuitionFees = getTuitionFees();
-    const siteConfig = getFullSiteConfig();
+export default async function PMBPage() {
+    const pmbTimeline = await getPmbTimeline();
+    const tuitionFees = await getTuitionFees();
+    const siteConfig = await getFullSiteConfig();
 
     return (
         <>

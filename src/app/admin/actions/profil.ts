@@ -24,11 +24,11 @@ export async function updateProfil(formData: FormData) {
 
     for (const entry of entries) {
         if (entry.value) {
-            const existing = db.select().from(schema.profile).where(eq(schema.profile.key, entry.key)).get();
-            if (existing) {
-                db.update(schema.profile).set({ value: entry.value }).where(eq(schema.profile.key, entry.key)).run();
+            const existing = await db.select().from(schema.profile).where(eq(schema.profile.key, entry.key));
+            if (existing.length > 0) {
+                await db.update(schema.profile).set({ value: entry.value }).where(eq(schema.profile.key, entry.key));
             } else {
-                db.insert(schema.profile).values(entry).run();
+                await db.insert(schema.profile).values(entry);
             }
         }
     }
@@ -54,11 +54,11 @@ export async function updateSiteConfig(formData: FormData) {
 
     for (const entry of entries) {
         if (entry.value) {
-            const existing = db.select().from(schema.siteConfig).where(eq(schema.siteConfig.key, entry.key)).get();
-            if (existing) {
-                db.update(schema.siteConfig).set({ value: entry.value }).where(eq(schema.siteConfig.key, entry.key)).run();
+            const existing = await db.select().from(schema.siteConfig).where(eq(schema.siteConfig.key, entry.key));
+            if (existing.length > 0) {
+                await db.update(schema.siteConfig).set({ value: entry.value }).where(eq(schema.siteConfig.key, entry.key));
             } else {
-                db.insert(schema.siteConfig).values(entry).run();
+                await db.insert(schema.siteConfig).values(entry);
             }
         }
     }

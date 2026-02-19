@@ -27,20 +27,20 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   // Increment visitor count on each request (Server Component)
   try {
-    incrementViews();
+    await incrementViews();
   } catch (e) {
     console.error("Failed to increment views:", e);
   }
 
-  const siteConfig = getFullSiteConfig();
-  const visitorCount = getViews();
+  const siteConfig = await getFullSiteConfig();
+  const visitorCount = await getViews();
 
   return (
     <html lang="id" suppressHydrationWarning>

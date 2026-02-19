@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default async function EditHeroPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const slide = getHeroSlideById(Number(id));
+    const slide = await getHeroSlideById(Number(id));
 
     if (!slide) {
         notFound();

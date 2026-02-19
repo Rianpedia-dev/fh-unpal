@@ -6,8 +6,8 @@ import Image from "next/image";
 import { deleteHeroSlide } from "../actions/hero";
 import { DeleteButton } from "../components/delete-button";
 
-export default function AdminHeroPage() {
-    const slides = getHeroSlides();
+export default async function AdminHeroPage() {
+    const slides = await getHeroSlides();
 
     return (
         <div className="space-y-6">

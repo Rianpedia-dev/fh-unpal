@@ -4,8 +4,8 @@ import { deleteGaleri } from "../actions/galeri";
 import { DeleteButton } from "../components/delete-button";
 import { Plus, Pencil, Camera } from "lucide-react";
 
-export default function GaleriAdminPage() {
-    const items = getGallery();
+export default async function GaleriAdminPage() {
+    const items = await getGallery();
     return (
         <div>
             <div className="flex items-center justify-between mb-6">

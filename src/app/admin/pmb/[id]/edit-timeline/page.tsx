@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default async function EditTimelinePage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const item = getPmbTimelineById(Number(id));
+    const item = await getPmbTimelineById(Number(id));
     if (!item) notFound();
 
     return (

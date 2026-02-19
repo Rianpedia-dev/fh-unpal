@@ -2,8 +2,8 @@ import { getFullProfile } from "@/db/queries";
 import { updateProfil } from "../actions/profil";
 import { BookOpen, Save } from "lucide-react";
 
-export default function ProfilAdminPage() {
-    const data = getFullProfile();
+export default async function ProfilAdminPage() {
+    const data = await getFullProfile();
 
     return (
         <div>

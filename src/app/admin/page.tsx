@@ -1,8 +1,8 @@
 import { getDashboardCounts } from "@/db/queries";
 import { Megaphone, GraduationCap, Briefcase, UsersRound, Camera } from "lucide-react";
 
-export default function AdminDashboard() {
-    const counts = getDashboardCounts();
+export default async function AdminDashboard() {
+    const counts = await getDashboardCounts();
 
     const stats = [
         { label: "Pengumuman", count: counts.announcements, icon: Megaphone, color: "from-red-500 to-red-600", shadow: "shadow-red-500/20" },

@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default async function EditBiayaPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const item = getTuitionFeeById(Number(id));
+    const item = await getTuitionFeeById(Number(id));
     if (!item) notFound();
 
     return (

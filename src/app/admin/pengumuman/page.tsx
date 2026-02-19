@@ -4,8 +4,8 @@ import { deletePengumuman } from "../actions/pengumuman";
 import { DeleteButton } from "../components/delete-button";
 import { Plus, Pencil, Megaphone } from "lucide-react";
 
-export default function PengumumanPage() {
-    const items = getAnnouncements();
+export default async function PengumumanPage() {
+    const items = await getAnnouncements();
 
     return (
         <div>

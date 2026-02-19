@@ -12,7 +12,7 @@ export async function createDosen(formData: FormData) {
     const file = formData.get("image") as File;
     const uploadedPath = await uploadImage(file, "dosen");
 
-    db.insert(schema.lecturers)
+    await db.insert(schema.lecturers)
         .values({
             name: formData.get("name") as string,
             nidn: formData.get("nidn") as string,
@@ -21,8 +21,7 @@ export async function createDosen(formData: FormData) {
             education: formData.get("education") as string,
             email: formData.get("email") as string,
             imageUrl: uploadedPath || (formData.get("imageUrl") as string) || "/images/dosen/placeholder.jpg",
-        })
-        .run();
+        });
 
     revalidatePath("/admin/dosen");
     revalidatePath("/civitas");
@@ -50,10 +49,9 @@ export async function updateDosen(formData: FormData) {
         if (imageUrl) updateData.imageUrl = imageUrl;
     }
 
-    db.update(schema.lecturers)
+    await db.update(schema.lecturers)
         .set(updateData)
-        .where(eq(schema.lecturers.id, id))
-        .run();
+        .where(eq(schema.lecturers.id, id));
 
     revalidatePath("/admin/dosen");
     revalidatePath("/civitas");
@@ -63,7 +61,7 @@ export async function updateDosen(formData: FormData) {
 
 export async function deleteDosen(formData: FormData) {
     const id = Number(formData.get("id"));
-    db.delete(schema.lecturers).where(eq(schema.lecturers.id, id)).run();
+    await db.delete(schema.lecturers).where(eq(schema.lecturers.id, id));
 
     revalidatePath("/admin/dosen");
     revalidatePath("/civitas");

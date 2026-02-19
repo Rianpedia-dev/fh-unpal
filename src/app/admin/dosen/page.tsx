@@ -4,8 +4,8 @@ import { deleteDosen } from "../actions/dosen";
 import { DeleteButton } from "../components/delete-button";
 import { Plus, Pencil, GraduationCap } from "lucide-react";
 
-export default function DosenPage() {
-    const items = getLecturers();
+export default async function DosenPage() {
+    const items = await getLecturers();
 
     return (
         <div>

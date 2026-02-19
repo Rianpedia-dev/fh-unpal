@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default async function EditGaleriPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const item = getGalleryById(Number(id));
+    const item = await getGalleryById(Number(id));
     if (!item) notFound();
 
     return (

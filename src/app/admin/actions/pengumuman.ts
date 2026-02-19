@@ -7,15 +7,14 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createPengumuman(formData: FormData) {
-    db.insert(schema.announcements)
+    await db.insert(schema.announcements)
         .values({
             title: formData.get("title") as string,
             excerpt: formData.get("excerpt") as string,
             content: formData.get("content") as string,
             date: formData.get("date") as string,
             category: formData.get("category") as "Berita" | "Pengumuman",
-        })
-        .run();
+        });
 
     revalidatePath("/admin/pengumuman");
     revalidatePath("/");
@@ -24,7 +23,7 @@ export async function createPengumuman(formData: FormData) {
 
 export async function updatePengumuman(formData: FormData) {
     const id = Number(formData.get("id"));
-    db.update(schema.announcements)
+    await db.update(schema.announcements)
         .set({
             title: formData.get("title") as string,
             excerpt: formData.get("excerpt") as string,
@@ -32,8 +31,7 @@ export async function updatePengumuman(formData: FormData) {
             date: formData.get("date") as string,
             category: formData.get("category") as "Berita" | "Pengumuman",
         })
-        .where(eq(schema.announcements.id, id))
-        .run();
+        .where(eq(schema.announcements.id, id));
 
     revalidatePath("/admin/pengumuman");
     revalidatePath("/");
@@ -42,7 +40,7 @@ export async function updatePengumuman(formData: FormData) {
 
 export async function deletePengumuman(formData: FormData) {
     const id = Number(formData.get("id"));
-    db.delete(schema.announcements).where(eq(schema.announcements.id, id)).run();
+    await db.delete(schema.announcements).where(eq(schema.announcements.id, id));
 
     revalidatePath("/admin/pengumuman");
     revalidatePath("/");

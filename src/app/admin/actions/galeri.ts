@@ -12,14 +12,13 @@ export async function createGaleri(formData: FormData) {
     const file = formData.get("image") as File;
     const uploadedPath = await uploadImage(file, "galeri");
 
-    db.insert(schema.gallery)
+    await db.insert(schema.gallery)
         .values({
             title: formData.get("title") as string,
             category: formData.get("category") as "Akademik" | "Kemahasiswaan" | "Seremonial",
             imageUrl: uploadedPath || (formData.get("imageUrl") as string) || "/images/gallery/placeholder.jpg",
             date: formData.get("date") as string,
-        })
-        .run();
+        });
 
     revalidatePath("/admin/galeri");
     revalidatePath("/galeri");
@@ -44,10 +43,9 @@ export async function updateGaleri(formData: FormData) {
         if (imageUrl) updateData.imageUrl = imageUrl;
     }
 
-    db.update(schema.gallery)
+    await db.update(schema.gallery)
         .set(updateData)
-        .where(eq(schema.gallery.id, id))
-        .run();
+        .where(eq(schema.gallery.id, id));
 
     revalidatePath("/admin/galeri");
     revalidatePath("/galeri");
@@ -57,7 +55,7 @@ export async function updateGaleri(formData: FormData) {
 
 export async function deleteGaleri(formData: FormData) {
     const id = Number(formData.get("id"));
-    db.delete(schema.gallery).where(eq(schema.gallery.id, id)).run();
+    await db.delete(schema.gallery).where(eq(schema.gallery.id, id));
 
     revalidatePath("/admin/galeri");
     revalidatePath("/galeri");

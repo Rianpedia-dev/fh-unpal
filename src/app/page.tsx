@@ -29,14 +29,14 @@ import {
 import { HomeNewsSection } from "@/components/home-news-section";
 import { PartnersCarousel } from "@/components/partners-carousel";
 
-export default function Home() {
+export default async function Home() {
   // Ambil data dari database
-  const announcements = getAnnouncements();
+  const announcements = await getAnnouncements();
   const latestNews = announcements.reverse().slice(0, 3);
-  const siteConfig = getFullSiteConfig();
-  const slides = getHeroSlides();
-  const profile = getFullProfile();
-  const lecturers = getLecturers();
+  const siteConfig = await getFullSiteConfig();
+  const slides = await getHeroSlides();
+  const profile = await getFullProfile();
+  const lecturers = await getLecturers();
 
   // Data hero (gunakan slide pertama)
   const heroData = {

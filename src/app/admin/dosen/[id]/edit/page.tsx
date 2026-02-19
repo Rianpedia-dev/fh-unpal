@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default async function EditDosenPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const item = getLecturerById(Number(id));
+    const item = await getLecturerById(Number(id));
     if (!item) notFound();
 
     return (

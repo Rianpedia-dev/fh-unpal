@@ -11,7 +11,7 @@ export async function createHeroSlide(formData: FormData) {
     const file = formData.get("image") as File;
     const uploadedPath = await uploadImage(file, "hero");
 
-    db.insert(schema.heroSlides)
+    await db.insert(schema.heroSlides)
         .values({
             title: formData.get("title") as string,
             subtitle: formData.get("subtitle") as string,
@@ -20,8 +20,7 @@ export async function createHeroSlide(formData: FormData) {
             buttonLink: formData.get("buttonLink") as string || "/pmb",
             imageUrl: uploadedPath || "/images/hero-placeholder.jpg",
             order: Number(formData.get("order")) || 0,
-        })
-        .run();
+        });
 
     revalidatePath("/");
     revalidatePath("/admin/hero");
@@ -46,10 +45,9 @@ export async function updateHeroSlide(formData: FormData) {
         updateData.imageUrl = uploadedPath;
     }
 
-    db.update(schema.heroSlides)
+    await db.update(schema.heroSlides)
         .set(updateData)
-        .where(eq(schema.heroSlides.id, id))
-        .run();
+        .where(eq(schema.heroSlides.id, id));
 
     revalidatePath("/");
     revalidatePath("/admin/hero");
@@ -58,7 +56,7 @@ export async function updateHeroSlide(formData: FormData) {
 
 export async function deleteHeroSlide(formData: FormData) {
     const id = Number(formData.get("id"));
-    db.delete(schema.heroSlides).where(eq(schema.heroSlides.id, id)).run();
+    await db.delete(schema.heroSlides).where(eq(schema.heroSlides.id, id));
 
     revalidatePath("/");
     revalidatePath("/admin/hero");

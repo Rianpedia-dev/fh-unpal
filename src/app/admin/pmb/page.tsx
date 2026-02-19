@@ -4,9 +4,9 @@ import { deleteTimeline, deleteFee } from "../actions/pmb";
 import { DeleteButton } from "../components/delete-button";
 import { Plus, Pencil, FileText, Wallet } from "lucide-react";
 
-export default function PmbPage() {
-    const timeline = getPmbTimeline();
-    const fees = getTuitionFees();
+export default async function PmbPage() {
+    const timeline = await getPmbTimeline();
+    const fees = await getTuitionFees();
 
     return (
         <div className="space-y-8">

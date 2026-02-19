@@ -5,99 +5,181 @@ import { eq, asc, sql } from "drizzle-orm";
 // ============================================================
 // PENGUMUMAN
 // ============================================================
-export function getAnnouncements() {
-    return db.select().from(schema.announcements).orderBy(schema.announcements.id).all();
+export async function getAnnouncements() {
+    try {
+        return await db.select().from(schema.announcements).orderBy(schema.announcements.id);
+    } catch (e) {
+        console.error("Failed to get announcements:", e);
+        return [];
+    }
 }
 
-export function getAnnouncementById(id: number) {
-    return db.select().from(schema.announcements).where(eq(schema.announcements.id, id)).get();
+export async function getAnnouncementById(id: number) {
+    try {
+        const rows = await db.select().from(schema.announcements).where(eq(schema.announcements.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get announcement ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // DOSEN
 // ============================================================
-export function getLecturers() {
-    return db.select().from(schema.lecturers).orderBy(schema.lecturers.id).all();
+export async function getLecturers() {
+    try {
+        return await db.select().from(schema.lecturers).orderBy(schema.lecturers.id);
+    } catch (e) {
+        console.error("Failed to get lecturers:", e);
+        return [];
+    }
 }
 
-export function getLecturerById(id: number) {
-    return db.select().from(schema.lecturers).where(eq(schema.lecturers.id, id)).get();
+export async function getLecturerById(id: number) {
+    try {
+        const rows = await db.select().from(schema.lecturers).where(eq(schema.lecturers.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get lecturer ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // STAFF
 // ============================================================
-export function getStaff() {
-    return db.select().from(schema.staff).orderBy(schema.staff.id).all();
+export async function getStaff() {
+    try {
+        return await db.select().from(schema.staff).orderBy(schema.staff.id);
+    } catch (e) {
+        console.error("Failed to get staff:", e);
+        return [];
+    }
 }
 
-export function getStaffById(id: number) {
-    return db.select().from(schema.staff).where(eq(schema.staff.id, id)).get();
+export async function getStaffById(id: number) {
+    try {
+        const rows = await db.select().from(schema.staff).where(eq(schema.staff.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get staff ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // ORGANISASI
 // ============================================================
-export function getOrganizations() {
-    return db.select().from(schema.organizations).orderBy(schema.organizations.id).all();
+export async function getOrganizations() {
+    try {
+        return await db.select().from(schema.organizations).orderBy(schema.organizations.id);
+    } catch (e) {
+        console.error("Failed to get organizations:", e);
+        return [];
+    }
 }
 
-export function getOrganizationById(id: number) {
-    return db.select().from(schema.organizations).where(eq(schema.organizations.id, id)).get();
+export async function getOrganizationById(id: number) {
+    try {
+        const rows = await db.select().from(schema.organizations).where(eq(schema.organizations.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get organization ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // GALERI
 // ============================================================
-export function getGallery() {
-    return db.select().from(schema.gallery).orderBy(schema.gallery.id).all();
+export async function getGallery() {
+    try {
+        return await db.select().from(schema.gallery).orderBy(schema.gallery.id);
+    } catch (e) {
+        console.error("Failed to get gallery:", e);
+        return [];
+    }
 }
 
-export function getGalleryById(id: number) {
-    return db.select().from(schema.gallery).where(eq(schema.gallery.id, id)).get();
+export async function getGalleryById(id: number) {
+    try {
+        const rows = await db.select().from(schema.gallery).where(eq(schema.gallery.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get gallery ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // PMB TIMELINE
 // ============================================================
-export function getPmbTimeline() {
-    return db.select().from(schema.pmbTimeline).orderBy(asc(schema.pmbTimeline.step)).all();
+export async function getPmbTimeline() {
+    try {
+        return await db.select().from(schema.pmbTimeline).orderBy(asc(schema.pmbTimeline.step));
+    } catch (e) {
+        console.error("Failed to get PMB timeline:", e);
+        return [];
+    }
 }
 
-export function getPmbTimelineById(id: number) {
-    return db.select().from(schema.pmbTimeline).where(eq(schema.pmbTimeline.id, id)).get();
+export async function getPmbTimelineById(id: number) {
+    try {
+        const rows = await db.select().from(schema.pmbTimeline).where(eq(schema.pmbTimeline.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get PMB timeline ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // BIAYA KULIAH
 // ============================================================
-export function getTuitionFees() {
-    return db.select().from(schema.tuitionFees).orderBy(schema.tuitionFees.id).all();
+export async function getTuitionFees() {
+    try {
+        return await db.select().from(schema.tuitionFees).orderBy(schema.tuitionFees.id);
+    } catch (e) {
+        console.error("Failed to get tuition fees:", e);
+        return [];
+    }
 }
 
-export function getTuitionFeeById(id: number) {
-    return db.select().from(schema.tuitionFees).where(eq(schema.tuitionFees.id, id)).get();
+export async function getTuitionFeeById(id: number) {
+    try {
+        const rows = await db.select().from(schema.tuitionFees).where(eq(schema.tuitionFees.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get tuition fee ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // PROFIL (Key-Value)
 // ============================================================
-export function getProfileValue(key: string): string {
-    const row = db.select().from(schema.profile).where(eq(schema.profile.key, key)).get();
-    return row?.value ?? "";
+export async function getProfileValue(key: string): Promise<string> {
+    try {
+        const rows = await db.select().from(schema.profile).where(eq(schema.profile.key, key));
+        return rows[0]?.value ?? "";
+    } catch (e) {
+        console.error(`Failed to get profile value for ${key}:`, e);
+        return "";
+    }
 }
 
-export function getAllProfile() {
+export async function getAllProfile() {
     try {
-        return db.select().from(schema.profile).all();
+        return await db.select().from(schema.profile);
     } catch (e) {
         console.error("Failed to get all profile:", e);
         return [];
     }
 }
 
-export function getFullProfile() {
-    const rows = getAllProfile();
+export async function getFullProfile() {
+    const rows = await getAllProfile();
     const map: Record<string, string> = {};
     for (const row of rows) {
         map[row.key] = row.value;
@@ -134,9 +216,14 @@ export function getFullProfile() {
 // ============================================================
 // SITE CONFIG (Key-Value)
 // ============================================================
-export function getSiteConfigValue(key: string): string {
-    const row = db.select().from(schema.siteConfig).where(eq(schema.siteConfig.key, key)).get();
-    return row?.value ?? "";
+export async function getSiteConfigValue(key: string): Promise<string> {
+    try {
+        const rows = await db.select().from(schema.siteConfig).where(eq(schema.siteConfig.key, key));
+        return rows[0]?.value ?? "";
+    } catch (e) {
+        console.error(`Failed to get site config value for ${key}:`, e);
+        return "";
+    }
 }
 
 export interface SiteConfig {
@@ -154,10 +241,10 @@ export interface SiteConfig {
     };
 }
 
-export function getFullSiteConfig(): SiteConfig {
+export async function getFullSiteConfig(): Promise<SiteConfig> {
     const map: Record<string, string> = {};
     try {
-        const rows = db.select().from(schema.siteConfig).all();
+        const rows = await db.select().from(schema.siteConfig);
         for (const row of rows) {
             map[row.key] = row.value;
         }
@@ -184,44 +271,63 @@ export function getFullSiteConfig(): SiteConfig {
 // ============================================================
 // COUNTS (untuk dashboard admin)
 // ============================================================
-export function getDashboardCounts() {
-    const announcementsCount = db.select().from(schema.announcements).all().length;
-    const lecturersCount = db.select().from(schema.lecturers).all().length;
-    const staffCount = db.select().from(schema.staff).all().length;
-    const organizationsCount = db.select().from(schema.organizations).all().length;
-    const galleryCount = db.select().from(schema.gallery).all().length;
+export async function getDashboardCounts() {
+    try {
+        const [announcementsList, lecturersList, staffList, organizationsList, galleryList] = await Promise.all([
+            db.select().from(schema.announcements),
+            db.select().from(schema.lecturers),
+            db.select().from(schema.staff),
+            db.select().from(schema.organizations),
+            db.select().from(schema.gallery)
+        ]);
 
-    return {
-        announcements: announcementsCount,
-        lecturers: lecturersCount,
-        staff: staffCount,
-        organizations: organizationsCount,
-        gallery: galleryCount,
-    };
+        return {
+            announcements: announcementsList.length,
+            lecturers: lecturersList.length,
+            staff: staffList.length,
+            organizations: organizationsList.length,
+            gallery: galleryList.length,
+        };
+    } catch (e) {
+        console.error("Failed to get dashboard counts:", e);
+        return {
+            announcements: 0,
+            lecturers: 0,
+            staff: 0,
+            organizations: 0,
+            gallery: 0,
+        };
+    }
 }
 
 // ============================================================
 // HERO SLIDER
 // ============================================================
-export function getHeroSlides() {
+export async function getHeroSlides() {
     try {
-        return db.select().from(schema.heroSlides).orderBy(asc(schema.heroSlides.order)).all();
+        return await db.select().from(schema.heroSlides).orderBy(asc(schema.heroSlides.order));
     } catch (e) {
         console.error("Failed to get hero slides:", e);
         return [];
     }
 }
 
-export function getHeroSlideById(id: number) {
-    return db.select().from(schema.heroSlides).where(eq(schema.heroSlides.id, id)).get();
+export async function getHeroSlideById(id: number) {
+    try {
+        const rows = await db.select().from(schema.heroSlides).where(eq(schema.heroSlides.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        console.error(`Failed to get hero slide ${id}:`, e);
+        return undefined;
+    }
 }
 
 // ============================================================
 // SITE STATS / VISITOR COUNTER
 // ============================================================
-export function incrementViews() {
+export async function incrementViews() {
     try {
-        return db.run(
+        return await db.execute(
             sql`UPDATE site_stats SET views = views + 1 WHERE id = 1`
         );
     } catch (e) {
@@ -229,13 +335,12 @@ export function incrementViews() {
     }
 }
 
-export function getViews(): number {
+export async function getViews(): Promise<number> {
     try {
-        const row = db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1)).get();
-        return row?.views ?? 0;
+        const rows = await db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1));
+        return rows[0]?.views ?? 0;
     } catch (e) {
         console.error("Failed to get views:", e);
         return 0;
     }
 }
-

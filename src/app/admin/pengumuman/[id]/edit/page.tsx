@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default async function EditPengumumanPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const item = getAnnouncementById(Number(id));
+    const item = await getAnnouncementById(Number(id));
     if (!item) notFound();
 
     return (

@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     description: "Dokumentasi berbagai kegiatan dan momen penting Fakultas Hukum Universitas Palembang.",
 };
 
-export default function GaleriPage() {
-    const items = getGallery();
+export default async function GaleriPage() {
+    const items = await getGallery();
 
     return <GalleryContent items={items} />;
 }

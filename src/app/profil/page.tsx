@@ -10,8 +10,8 @@ export const metadata: Metadata = {
     description: "Sejarah, Visi & Misi, Struktur Organisasi, dan Akreditasi Fakultas Hukum Universitas Palembang.",
 };
 
-export default function ProfilPage() {
-    const profileData = getFullProfile();
+export default async function ProfilPage() {
+    const profileData = await getFullProfile();
     return (
         <>
             {/* Hero Banner */}

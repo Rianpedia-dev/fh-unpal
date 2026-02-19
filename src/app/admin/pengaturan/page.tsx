@@ -2,8 +2,8 @@ import { getFullSiteConfig } from "@/db/queries";
 import { updateSiteConfig } from "../actions/profil";
 import { Settings, Save } from "lucide-react";
 
-export default function PengaturanPage() {
-    const data = getFullSiteConfig();
+export default async function PengaturanPage() {
+    const data = await getFullSiteConfig();
 
     return (
         <div>

@@ -1,12 +1,12 @@
 /**
  * Database Seed Script
- * Menginisialisasi data awal dari data.ts ke database SQLite
+ * Menginisialisasi data awal dari data.ts ke database MySQL
  *
  * Jalankan: npx tsx src/db/seed.ts
  */
 
-import Database from "better-sqlite3";
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 import * as schema from "./schema";
 import {
     announcements as announcementsData,
@@ -20,33 +20,33 @@ import {
     siteConfig as siteConfigData,
 } from "../lib/data";
 
-const sqlite = new Database("sqlite.db");
-sqlite.pragma("journal_mode = WAL");
-const db = drizzle(sqlite, { schema });
-
 async function seed() {
+    const connection = await mysql.createConnection(
+        process.env.DATABASE_URL || "mysql://root:@localhost:3306/fh_unpal"
+    );
+    const db = drizzle(connection, { schema, mode: "default" });
+
     console.log("🌱 Seeding database...\n");
 
     // 1. Announcements
     console.log("📢 Seeding announcements...");
-    db.delete(schema.announcements).run();
+    await db.delete(schema.announcements);
     for (const item of announcementsData) {
-        db.insert(schema.announcements)
+        await db.insert(schema.announcements)
             .values({
                 title: item.title,
                 excerpt: item.excerpt,
                 content: item.excerpt,
                 date: item.date,
                 category: item.category,
-            })
-            .run();
+            });
     }
 
     // 2. Lecturers
     console.log("👨‍🏫 Seeding lecturers...");
-    db.delete(schema.lecturers).run();
+    await db.delete(schema.lecturers);
     for (const item of lecturersData) {
-        db.insert(schema.lecturers)
+        await db.insert(schema.lecturers)
             .values({
                 name: item.name,
                 nidn: (item as any).nidn || (item as any).nip || "-",
@@ -54,79 +54,74 @@ async function seed() {
                 specialization: item.specialization,
                 education: item.education,
                 imageUrl: item.imageUrl,
-            })
-            .run();
+            });
     }
 
     // 3. Staff
     console.log("👤 Seeding staff...");
-    db.delete(schema.staff).run();
+    await db.delete(schema.staff);
     for (const item of staffMembers) {
-        db.insert(schema.staff)
+        await db.insert(schema.staff)
             .values({
                 name: item.name,
                 position: item.position,
                 imageUrl: item.imageUrl,
-            })
-            .run();
+            });
     }
 
     // 4. Organizations
     console.log("🏛️ Seeding organizations...");
-    db.delete(schema.organizations).run();
+    await db.delete(schema.organizations);
     for (const item of orgsData) {
-        db.insert(schema.organizations)
+        await db.insert(schema.organizations)
             .values({
                 name: item.name,
                 description: item.description,
                 type: item.type,
-            })
-            .run();
+            });
     }
 
     // 5. Gallery
     console.log("🖼️ Seeding gallery...");
-    db.delete(schema.gallery).run();
+    await db.delete(schema.gallery);
     for (const item of galleryItems) {
-        db.insert(schema.gallery)
+        await db.insert(schema.gallery)
             .values({
                 title: item.title,
                 category: item.category,
                 imageUrl: item.imageUrl,
                 date: item.date,
-            })
-            .run();
+            });
     }
 
     // 6. PMB Timeline
     console.log("📋 Seeding PMB timeline...");
-    db.delete(schema.pmbTimeline).run();
+    await db.delete(schema.pmbTimeline);
     for (const item of timelineData) {
-        db.insert(schema.pmbTimeline)
+        await db.insert(schema.pmbTimeline)
             .values({
                 step: item.step,
                 title: item.title,
                 description: item.description,
                 period: item.period,
-            })
-            .run();
+            });
     }
 
     // 7. Tuition Fees
     console.log("💰 Seeding tuition fees...");
-    db.delete(schema.tuitionFees).run();
+    await db.delete(schema.tuitionFees);
     for (const item of feesData) {
-        db.insert(schema.tuitionFees)
+        await db.insert(schema.tuitionFees)
             .values({
                 component: item.component,
                 amount: item.amount,
                 note: item.note,
-            })
-            .run();
+            });
     }
 
     // 8. Profile (key-value)
     console.log("📄 Seeding profile...");
+    await db.delete(schema.profile);
     const profileEntries = [
         { key: "sejarah", value: profileData.sejarah },
         { key: "visi", value: profileData.visi },
@@ -143,17 +138,12 @@ async function seed() {
         { key: "struktur_katuTataUsaha", value: profileData.strukturOrganisasi.katuTataUsaha },
     ];
     for (const entry of profileEntries) {
-        db.insert(schema.profile)
-            .values(entry)
-            .onConflictDoUpdate({
-                target: schema.profile.key,
-                set: { value: entry.value }
-            })
-            .run();
+        await db.insert(schema.profile).values(entry);
     }
 
     // 9. Site Config (key-value)
     console.log("⚙️ Seeding site config...");
+    await db.delete(schema.siteConfig);
     const configEntries = [
         { key: "name", value: siteConfigData.name },
         { key: "university", value: siteConfigData.university },
@@ -167,24 +157,16 @@ async function seed() {
         { key: "youtube", value: siteConfigData.socialMedia.youtube },
     ];
     for (const entry of configEntries) {
-        db.insert(schema.siteConfig)
-            .values(entry)
-            .onConflictDoUpdate({
-                target: schema.siteConfig.key,
-                set: { value: entry.value }
-            })
-            .run();
+        await db.insert(schema.siteConfig).values(entry);
     }
 
     // 10. Default Stat
     console.log("📊 Seeding site stats...");
-    db.insert(schema.siteStats)
-        .values({ id: 1, views: 0 })
-        .onConflictDoNothing()
-        .run();
+    await db.delete(schema.siteStats);
+    await db.insert(schema.siteStats).values({ views: 0 });
 
     console.log("\n✅ Seeding selesai!");
-    sqlite.close();
+    await connection.end();
 }
 
 seed().catch(console.error);
