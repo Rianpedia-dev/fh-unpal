@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, Scale } from "lucide-react";
+import { Menu } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
     Sheet,
@@ -29,16 +30,20 @@ export default function Navbar({ siteConfig }: { siteConfig: SiteConfig }) {
                 <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-navy to-brand-navy-light text-white shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                            <Scale className="h-5 w-5" />
-                            {/* Red corner accent */}
-                            <div className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-brand-red border-2 border-background" />
+                        <div className="relative h-10 w-10 sm:h-12 sm:w-12 transform group-hover:scale-110 transition-transform duration-300">
+                            <Image
+                                src="/logofh.png"
+                                alt="Logo FH UNPAL"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
                         </div>
-                        <div className="hidden sm:block">
-                            <p className="text-sm font-bold leading-tight tracking-tight text-foreground">
+                        <div className="flex flex-col">
+                            <p className="text-xs sm:text-sm font-bold leading-tight tracking-tight text-foreground">
                                 {siteConfig.name}
                             </p>
-                            <p className="text-[11px] text-muted-foreground font-medium">
+                            <p className="text-[10px] sm:text-[11px] text-muted-foreground font-medium">
                                 {siteConfig.university}
                             </p>
                         </div>
@@ -79,8 +84,13 @@ export default function Navbar({ siteConfig }: { siteConfig: SiteConfig }) {
                             </SheetTrigger>
                             <SheetContent side="right" className="w-[300px] pt-10">
                                 <SheetTitle className="flex items-center gap-3 px-2 mb-8">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-navy to-brand-navy-light text-white">
-                                        <Scale className="h-5 w-5" />
+                                    <div className="relative h-10 w-10">
+                                        <Image
+                                            src="/logofh.png"
+                                            alt="Logo FH UNPAL"
+                                            fill
+                                            className="object-contain"
+                                        />
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-foreground">{siteConfig.shortName}</p>

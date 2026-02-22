@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   },
   trailingSlash: false,
   generateBuildId: async () => "fhunpal-build",
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "4mb",
+    },
+  },
 };
 
 export default nextConfig;

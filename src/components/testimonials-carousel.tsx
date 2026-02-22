@@ -28,7 +28,7 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
             <div className="flex -ml-4 md:-ml-8">
                 {testimonials.map((testimonial) => (
                     <div key={testimonial.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 md:pl-8 py-4">
-                        <Card className="h-full glass-card border-border hover:border-foreground/10 transition-all duration-500 shadow-sm hover:shadow-2xl">
+                        <Card className="h-full glass-card border border-brand-red shadow-[0_0_15px_rgba(185,28,28,0.2)] hover:border-brand-red/80 transition-all duration-500 shadow-sm hover:shadow-2xl">
                             <CardContent className="p-8 flex flex-col h-full relative overflow-hidden">
                                 <Quote className="absolute -top-4 -right-4 w-24 h-24 text-foreground/5 opacity-10" />
 

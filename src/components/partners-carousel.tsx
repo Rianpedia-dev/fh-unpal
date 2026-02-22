@@ -29,46 +29,31 @@ export function PartnersCarousel({ partners }: PartnersCarouselProps) {
                         viewport={{ once: true }}
                         className="group relative"
                     >
-                        {/* Glow effect on hover */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-                        {/* Main Card */}
-                        <div className="relative flex flex-col items-center justify-center p-8 h-48 rounded-2xl bg-black/40 border border-white/5 backdrop-blur-sm group-hover:border-cyan-500/30 group-hover:bg-black/60 transition-all duration-500">
-
+                        {/* Logo and Name Container (No Card) */}
+                        <div className="relative flex flex-col items-center justify-center p-4 transition-all duration-500 group">
                             {/* Icon/Logo container */}
-                            <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-xl bg-white/5 group-hover:bg-white/10 transition-colors duration-500">
+                            <div className="w-24 h-24 md:w-32 md:h-32 mb-6 flex items-center justify-center rounded-3xl bg-muted/30 group-hover:bg-muted/50 transition-all duration-500 overflow-hidden p-6">
                                 {partner.logo ? (
                                     <img
                                         src={partner.logo}
                                         alt={partner.name}
-                                        className="max-h-10 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                                        className="h-full w-full object-contain opacity-100 transition-all duration-500 transform group-hover:scale-110"
                                     />
                                 ) : (
-                                    <div className="relative">
-                                        <div className="absolute inset-0 bg-cyan-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                        <ImageIcon className="w-8 h-8 text-white/10 group-hover:text-cyan-400 transition-colors duration-500 relative z-10" />
-                                    </div>
+                                    <ImageIcon className="w-10 h-10 text-muted-foreground/30 group-hover:text-brand-red transition-colors duration-500" />
                                 )}
                             </div>
 
                             {/* Partner Name */}
-                            <p className="text-xs font-bold text-center text-white/20 group-hover:text-white transition-colors duration-500 tracking-wider uppercase">
+                            <p className="text-[10px] md:text-xs font-bold text-center text-muted-foreground group-hover:text-foreground transition-colors duration-500 tracking-wider uppercase">
                                 {partner.name}
                             </p>
-
-                            {/* Decorative line on hover */}
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-cyan-500 group-hover:w-12 transition-all duration-500 rounded-full"></div>
                         </div>
                     </MotionDiv>
                 ))}
             </div>
 
-            {/* Side Scroll Indicator button (aesthetic only from ref image) */}
-            <div className="absolute -right-4 top-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white/40 cursor-pointer hover:bg-white/10 hover:text-white transition-all">
-                <div className="w-4 h-0.5 bg-current rounded-full relative">
-                    <div className="absolute -top-1 -right-0.5 w-1.5 h-1.5 rounded-full bg-current"></div>
-                </div>
-            </div>
+
         </div>
     );
 }

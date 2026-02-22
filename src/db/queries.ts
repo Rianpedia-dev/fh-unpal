@@ -3,13 +3,12 @@ import * as schema from "./schema";
 import { eq, asc, sql } from "drizzle-orm";
 
 // ============================================================
-// PENGUMUMAN
+// PENGUMUMAN (Berita)
 // ============================================================
 export async function getAnnouncements() {
     try {
         return await db.select().from(schema.announcements).orderBy(schema.announcements.id);
     } catch (e) {
-        console.error("Failed to get announcements:", e);
         return [];
     }
 }
@@ -19,7 +18,6 @@ export async function getAnnouncementById(id: number) {
         const rows = await db.select().from(schema.announcements).where(eq(schema.announcements.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get announcement ${id}:`, e);
         return undefined;
     }
 }
@@ -31,7 +29,6 @@ export async function getLecturers() {
     try {
         return await db.select().from(schema.lecturers).orderBy(schema.lecturers.id);
     } catch (e) {
-        console.error("Failed to get lecturers:", e);
         return [];
     }
 }
@@ -41,7 +38,6 @@ export async function getLecturerById(id: number) {
         const rows = await db.select().from(schema.lecturers).where(eq(schema.lecturers.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get lecturer ${id}:`, e);
         return undefined;
     }
 }
@@ -53,7 +49,6 @@ export async function getStaff() {
     try {
         return await db.select().from(schema.staff).orderBy(schema.staff.id);
     } catch (e) {
-        console.error("Failed to get staff:", e);
         return [];
     }
 }
@@ -63,7 +58,6 @@ export async function getStaffById(id: number) {
         const rows = await db.select().from(schema.staff).where(eq(schema.staff.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get staff ${id}:`, e);
         return undefined;
     }
 }
@@ -75,7 +69,6 @@ export async function getOrganizations() {
     try {
         return await db.select().from(schema.organizations).orderBy(schema.organizations.id);
     } catch (e) {
-        console.error("Failed to get organizations:", e);
         return [];
     }
 }
@@ -85,7 +78,6 @@ export async function getOrganizationById(id: number) {
         const rows = await db.select().from(schema.organizations).where(eq(schema.organizations.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get organization ${id}:`, e);
         return undefined;
     }
 }
@@ -97,7 +89,6 @@ export async function getGallery() {
     try {
         return await db.select().from(schema.gallery).orderBy(schema.gallery.id);
     } catch (e) {
-        console.error("Failed to get gallery:", e);
         return [];
     }
 }
@@ -107,7 +98,6 @@ export async function getGalleryById(id: number) {
         const rows = await db.select().from(schema.gallery).where(eq(schema.gallery.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get gallery ${id}:`, e);
         return undefined;
     }
 }
@@ -119,7 +109,6 @@ export async function getPmbTimeline() {
     try {
         return await db.select().from(schema.pmbTimeline).orderBy(asc(schema.pmbTimeline.step));
     } catch (e) {
-        console.error("Failed to get PMB timeline:", e);
         return [];
     }
 }
@@ -129,7 +118,6 @@ export async function getPmbTimelineById(id: number) {
         const rows = await db.select().from(schema.pmbTimeline).where(eq(schema.pmbTimeline.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get PMB timeline ${id}:`, e);
         return undefined;
     }
 }
@@ -141,7 +129,6 @@ export async function getTuitionFees() {
     try {
         return await db.select().from(schema.tuitionFees).orderBy(schema.tuitionFees.id);
     } catch (e) {
-        console.error("Failed to get tuition fees:", e);
         return [];
     }
 }
@@ -151,7 +138,6 @@ export async function getTuitionFeeById(id: number) {
         const rows = await db.select().from(schema.tuitionFees).where(eq(schema.tuitionFees.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get tuition fee ${id}:`, e);
         return undefined;
     }
 }
@@ -164,7 +150,6 @@ export async function getProfileValue(key: string): Promise<string> {
         const rows = await db.select().from(schema.profile).where(eq(schema.profile.key, key));
         return rows[0]?.value ?? "";
     } catch (e) {
-        console.error(`Failed to get profile value for ${key}:`, e);
         return "";
     }
 }
@@ -173,7 +158,6 @@ export async function getAllProfile() {
     try {
         return await db.select().from(schema.profile);
     } catch (e) {
-        console.error("Failed to get all profile:", e);
         return [];
     }
 }
@@ -202,14 +186,17 @@ export async function getFullProfile() {
             validUntil: map["akreditasi_validUntil"] ?? "",
             description: map["akreditasi_description"] ?? "",
         },
-        strukturOrganisasi: {
-            dekan: map["struktur_dekan"] ?? "",
-            wakil1: map["struktur_wakil1"] ?? "",
-            wakil2: map["struktur_wakil2"] ?? "",
-            kaprodi: map["struktur_kaprodi"] ?? "",
-            sekretarisProdi: map["struktur_sekretarisProdi"] ?? "",
-            katuTataUsaha: map["struktur_katuTataUsaha"] ?? "",
-        },
+        tujuan: map["tujuan"] ?? "",
+        dekanName: map["dekan_name"] ?? "Dr. Ali Dahwir, S.H., M.H.",
+        sambutan: map["sambutan"] ?? "",
+        dekanImage: map["dekan_image"] ?? "",
+        stats: {
+            students: map["stats_students"] ?? "0",
+            studyPrograms: map["stats_study_programs"] ?? "0",
+            partners: map["stats_partners"] ?? "0",
+            yearsStanding: map["stats_years"] ?? "0",
+            successfulAlumni: map["stats_alumni"] ?? "0",
+        }
     };
 }
 
@@ -221,7 +208,6 @@ export async function getSiteConfigValue(key: string): Promise<string> {
         const rows = await db.select().from(schema.siteConfig).where(eq(schema.siteConfig.key, key));
         return rows[0]?.value ?? "";
     } catch (e) {
-        console.error(`Failed to get site config value for ${key}:`, e);
         return "";
     }
 }
@@ -239,6 +225,7 @@ export interface SiteConfig {
         facebook: string;
         youtube: string;
     };
+    mapUrl: string;
 }
 
 export async function getFullSiteConfig(): Promise<SiteConfig> {
@@ -248,9 +235,7 @@ export async function getFullSiteConfig(): Promise<SiteConfig> {
         for (const row of rows) {
             map[row.key] = row.value;
         }
-    } catch (e) {
-        console.error("Failed to get full site config:", e);
-    }
+    } catch (e) { }
 
     return {
         name: map["name"] ?? "Fakultas Hukum",
@@ -265,20 +250,23 @@ export async function getFullSiteConfig(): Promise<SiteConfig> {
             facebook: map["facebook"] ?? "",
             youtube: map["youtube"] ?? "",
         },
+        mapUrl: map["mapUrl"] ?? "",
     };
 }
 
 // ============================================================
-// COUNTS (untuk dashboard admin)
+// DASHBOARD COUNTS
 // ============================================================
 export async function getDashboardCounts() {
     try {
-        const [announcementsList, lecturersList, staffList, organizationsList, galleryList] = await Promise.all([
+        const [announcementsList, lecturersList, staffList, organizationsList, galleryList, testimonialsList, partnersList] = await Promise.all([
             db.select().from(schema.announcements),
             db.select().from(schema.lecturers),
             db.select().from(schema.staff),
             db.select().from(schema.organizations),
-            db.select().from(schema.gallery)
+            db.select().from(schema.gallery),
+            db.select().from(schema.testimonials),
+            db.select().from(schema.partners),
         ]);
 
         return {
@@ -287,15 +275,18 @@ export async function getDashboardCounts() {
             staff: staffList.length,
             organizations: organizationsList.length,
             gallery: galleryList.length,
+            testimonials: testimonialsList.length,
+            partners: partnersList.length,
         };
     } catch (e) {
-        console.error("Failed to get dashboard counts:", e);
         return {
             announcements: 0,
             lecturers: 0,
             staff: 0,
             organizations: 0,
             gallery: 0,
+            testimonials: 0,
+            partners: 0,
         };
     }
 }
@@ -307,7 +298,6 @@ export async function getHeroSlides() {
     try {
         return await db.select().from(schema.heroSlides).orderBy(asc(schema.heroSlides.order));
     } catch (e) {
-        console.error("Failed to get hero slides:", e);
         return [];
     }
 }
@@ -317,7 +307,6 @@ export async function getHeroSlideById(id: number) {
         const rows = await db.select().from(schema.heroSlides).where(eq(schema.heroSlides.id, id));
         return rows[0] ?? undefined;
     } catch (e) {
-        console.error(`Failed to get hero slide ${id}:`, e);
         return undefined;
     }
 }
@@ -327,12 +316,17 @@ export async function getHeroSlideById(id: number) {
 // ============================================================
 export async function incrementViews() {
     try {
-        return await db.execute(
-            sql`UPDATE site_stats SET views = views + 1 WHERE id = 1`
-        );
-    } catch (e) {
-        console.error("Failed to increment views:", e);
-    }
+        const stats = await db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1)).limit(1);
+        if (stats.length === 0) {
+            // Jika belum ada data sama sekali, buat data awal
+            await db.insert(schema.siteStats).values({ id: 1, views: 1 });
+            return;
+        }
+
+        return await db.update(schema.siteStats)
+            .set({ views: sql`${schema.siteStats.views} + 1` })
+            .where(eq(schema.siteStats.id, 1));
+    } catch (e) { }
 }
 
 export async function getViews(): Promise<number> {
@@ -340,7 +334,204 @@ export async function getViews(): Promise<number> {
         const rows = await db.select().from(schema.siteStats).where(eq(schema.siteStats.id, 1));
         return rows[0]?.views ?? 0;
     } catch (e) {
-        console.error("Failed to get views:", e);
         return 0;
+    }
+}
+
+// ============================================================
+// TESTIMONIALS (Testimoni Alumni)
+// ============================================================
+export async function getTestimonials() {
+    try {
+        return await db.select().from(schema.testimonials).orderBy(schema.testimonials.id);
+    } catch (e) {
+        return [];
+    }
+}
+
+export async function getTestimonialById(id: number) {
+    try {
+        const rows = await db.select().from(schema.testimonials).where(eq(schema.testimonials.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        return undefined;
+    }
+}
+
+// ============================================================
+// PARTNERS (Mitra/Kerjasama)
+// ============================================================
+export async function getPartners() {
+    try {
+        return await db.select().from(schema.partners).orderBy(asc(schema.partners.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+export async function getPartnerById(id: number) {
+    try {
+        const rows = await db.select().from(schema.partners).where(eq(schema.partners.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        return undefined;
+    }
+}
+
+// ============================================================
+// CONTACT INFO (Key-Value)
+// ============================================================
+export async function getContactInfo() {
+    try {
+        const rows = await db.select().from(schema.contactInfo);
+        const map: Record<string, string> = {};
+        for (const row of rows) {
+            map[row.key] = row.value;
+        }
+        return {
+            name: map["name"] ?? "Fakultas Hukum Universitas Palembang",
+            address: map["address"] ?? "",
+            city: map["city"] ?? "",
+            province: map["province"] ?? "",
+            postalCode: map["postalCode"] ?? "",
+            phone: map["phone"] ?? "",
+            fax: map["fax"] ?? "",
+            email: map["email"] ?? "",
+            website: map["website"] ?? "",
+            operatingHours: map["operatingHours"] ?? "",
+            mapUrl: map["mapUrl"] ?? "",
+        };
+    } catch (e) {
+        return {
+            name: "Fakultas Hukum Universitas Palembang",
+            address: "", city: "", province: "", postalCode: "",
+            phone: "", fax: "", email: "", website: "", operatingHours: "", mapUrl: "",
+        };
+    }
+}
+
+// ============================================================
+// SOCIAL MEDIA
+// ============================================================
+export async function getSocialMedia() {
+    try {
+        return await db.select().from(schema.socialMedia).orderBy(asc(schema.socialMedia.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// CAMPUS ACCESS
+// ============================================================
+export async function getCampusAccess() {
+    try {
+        return await db.select().from(schema.campusAccess).orderBy(asc(schema.campusAccess.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// PMB TRACKS (Jalur Pendaftaran)
+// ============================================================
+export async function getPmbTracks() {
+    try {
+        return await db.select().from(schema.pmbTracks).orderBy(asc(schema.pmbTracks.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// PMB CLASSES (Jenis Kelas)
+// ============================================================
+export async function getPmbClasses() {
+    try {
+        return await db.select().from(schema.pmbClasses).orderBy(asc(schema.pmbClasses.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// PMB FEE CATEGORIES
+// ============================================================
+export async function getPmbFeeCategories() {
+    try {
+        return await db.select().from(schema.pmbFeeCategories).orderBy(asc(schema.pmbFeeCategories.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// PMB FEE ITEMS
+// ============================================================
+export async function getPmbFeeItems() {
+    try {
+        return await db.select().from(schema.pmbFeeItems).orderBy(asc(schema.pmbFeeItems.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+export async function getPmbFeeItemsByCategoryId(categoryId: number) {
+    try {
+        return await db.select().from(schema.pmbFeeItems)
+            .where(eq(schema.pmbFeeItems.categoryId, categoryId))
+            .orderBy(asc(schema.pmbFeeItems.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// PMB REQUIREMENTS (Syarat Pendaftaran)
+// ============================================================
+export async function getPmbRequirements() {
+    try {
+        return await db.select().from(schema.pmbRequirements).orderBy(asc(schema.pmbRequirements.order));
+    } catch (e) {
+        return [];
+    }
+}
+
+// ============================================================
+// ADMIN USERS
+// ============================================================
+export async function getAdminUsers() {
+    try {
+        return await db.select().from(schema.adminUsers).orderBy(schema.adminUsers.id);
+    } catch (e) {
+        return [];
+    }
+}
+
+export async function getAdminUserByEmail(email: string) {
+    try {
+        const rows = await db.select().from(schema.adminUsers).where(eq(schema.adminUsers.email, email));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        return undefined;
+    }
+}
+
+export async function getAdminUserById(id: number) {
+    try {
+        const rows = await db.select().from(schema.adminUsers).where(eq(schema.adminUsers.id, id));
+        return rows[0] ?? undefined;
+    } catch (e) {
+        return undefined;
+    }
+}
+// ============================================================
+// PMB TEAM
+// ============================================================
+export async function getPmbTeam() {
+    try {
+        return await db.select().from(schema.pmbTeam).orderBy(asc(schema.pmbTeam.order));
+    } catch (e) {
+        return [];
     }
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import PublicLayout from "@/components/layout/public-layout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getFullSiteConfig, getViews, incrementViews } from "@/db/queries";
+import { OfflineDetector } from "@/components/offline-detector";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,6 +26,11 @@ export const metadata: Metadata = {
     "PMB",
     "Pendaftaran",
   ],
+  icons: {
+    icon: "/logofh.png",
+    shortcut: "/logofh.png",
+    apple: "/logofh.png",
+  },
 };
 
 export default async function RootLayout({
@@ -33,11 +39,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // Increment visitor count on each request (Server Component)
-  try {
-    await incrementViews();
-  } catch (e) {
-    console.error("Failed to increment views:", e);
-  }
+  await incrementViews();
 
   const siteConfig = await getFullSiteConfig();
   const visitorCount = await getViews();
@@ -53,6 +55,7 @@ export default async function RootLayout({
         >
           <PublicLayout siteConfig={siteConfig} visitorCount={visitorCount}>
             {children}
+            <OfflineDetector />
           </PublicLayout>
         </ThemeProvider>
       </body>

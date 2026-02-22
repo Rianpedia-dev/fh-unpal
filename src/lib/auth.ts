@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import crypto from "crypto";
+import { getAdminUserByEmail, getAdminUserById } from "@/db/queries";
 
 const AUTH_COOKIE = "admin_session";
 const SESSION_MAX_AGE = 60 * 60 * 24; // 24 hours
@@ -15,19 +16,26 @@ export async function login(formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const adminPassword = process.env.ADMIN_PASSWORD;
+    const user = await getAdminUserByEmail(email);
 
-    if (!adminEmail || !adminPassword) {
-        return { error: "Konfigurasi admin belum diset." };
-    }
-
-    if (email !== adminEmail || password !== adminPassword) {
+    if (!user) {
         return { error: "Email atau password salah." };
     }
 
-    // Create session token
-    const token = hashPassword(`${email}:${Date.now()}:${process.env.AUTH_SECRET}`);
+    if (!user.isActive) {
+        return { error: "Akun Anda dinonaktifkan." };
+    }
+
+    const hashedPassword = hashPassword(password);
+    if (hashedPassword !== user.password) {
+        return { error: "Email atau password salah." };
+    }
+
+    // Create session token: userId:timestamp:hash
+    const timestamp = Date.now();
+    const secret = process.env.AUTH_SECRET || "default_secret";
+    const signature = crypto.createHash("sha256").update(`${user.id}:${timestamp}:${secret}`).digest("hex");
+    const token = `${user.id}:${timestamp}:${signature}`;
 
     const cookieStore = await cookies();
     cookieStore.set(AUTH_COOKIE, token, {
@@ -44,19 +52,47 @@ export async function login(formData: FormData) {
 export async function logout() {
     const cookieStore = await cookies();
     cookieStore.delete(AUTH_COOKIE);
-    redirect("/admin/login");
+    redirect("/");
 }
 
 export async function getSession() {
     const cookieStore = await cookies();
-    const session = cookieStore.get(AUTH_COOKIE);
-    return session?.value ?? null;
+    const sessionToken = cookieStore.get(AUTH_COOKIE)?.value;
+    if (!sessionToken) return null;
+
+    const [userId, timestamp, signature] = sessionToken.split(":");
+    if (!userId || !timestamp || !signature) return null;
+
+    // Verify signature
+    const secret = process.env.AUTH_SECRET || "default_secret";
+    const expectedSignature = crypto.createHash("sha256").update(`${userId}:${timestamp}:${secret}`).digest("hex");
+
+    if (signature !== expectedSignature) return null;
+
+    // Check expiration
+    if (Date.now() - parseInt(timestamp) > SESSION_MAX_AGE * 1000) return null;
+
+    return { userId: parseInt(userId) };
+}
+
+export async function getCurrentUser() {
+    const session = await getSession();
+    if (!session) return null;
+    return await getAdminUserById(session.userId);
 }
 
 export async function requireAuth() {
-    const session = await getSession();
-    if (!session) {
+    const user = await getCurrentUser();
+    if (!user) {
         redirect("/admin/login");
     }
-    return session;
+    return user;
+}
+
+export async function requireSuperAdmin() {
+    const user = await requireAuth();
+    if (user.role !== "superadmin") {
+        redirect("/admin");
+    }
+    return user;
 }

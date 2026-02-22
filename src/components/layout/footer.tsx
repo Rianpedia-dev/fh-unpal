@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
-    GraduationCap,
     MapPin,
     Phone,
     Mail,
@@ -46,20 +46,25 @@ export default function Footer({
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] -z-10"></div>
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] -z-10"></div>
 
-            <div className="relative container mx-auto px-4 py-20 z-10">
+            <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                     {/* Logo dan Deskripsi */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-red to-red-700 flex items-center justify-center shadow-lg shadow-brand-red/20 transform hover:rotate-6 transition-transform">
-                                <GraduationCap className="w-8 h-8 text-white" />
+                            <div className="relative w-16 h-16 transform hover:rotate-6 transition-transform">
+                                <Image
+                                    src="/logofh.png"
+                                    alt="Logo FH UNPAL"
+                                    fill
+                                    className="object-contain"
+                                />
                             </div>
                             <div>
                                 <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-b from-[#FFF5C3] via-[#FFD700] to-[#B8860B] drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] block dark:filter dark:brightness-110">
-                                    {siteConfig.shortName}
+                                    Fakultas Hukum
                                 </span>
                                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground block mt-0.5">
-                                    {siteConfig.university}
+                                    {siteConfig.university || "Universitas Palembang"}
                                 </span>
                             </div>
                         </div>
@@ -130,22 +135,24 @@ export default function Footer({
                     </div>
 
                     {/* Informasi / Visitor Counter */}
-                    <div className="space-y-10">
-                        <div>
-                            <h3 className="text-lg font-bold mb-8 text-foreground flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-brand-red/10 flex items-center justify-center">
-                                    <TrendingUp className="w-5 h-5 text-brand-red" />
-                                </div>
-                                Informasi
-                            </h3>
-                            <ul className="space-y-4">
+                    <div className="space-y-10 flex flex-col items-start lg:items-end">
+                        <div className="w-full">
+                            <div className="lg:flex lg:justify-end">
+                                <h3 className="text-lg font-bold mb-8 text-foreground flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-brand-red/10 flex items-center justify-center">
+                                        <TrendingUp className="w-5 h-5 text-brand-red" />
+                                    </div>
+                                    Informasi
+                                </h3>
+                            </div>
+                            <ul className="space-y-4 lg:flex lg:flex-col lg:items-end">
                                 <li>
                                     <Link href="/akreditasi" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
                                         Akreditasi BAN-PT
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
+                                    <Link href="/admin/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
                                         Portal Akademik
                                     </Link>
                                 </li>
@@ -161,7 +168,7 @@ export default function Footer({
                                     <div className="ml-3 h-4 w-px bg-border/50"></div>
                                 </div>
                                 <div className="flex flex-col -space-y-1">
-                                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Traffic</span>
+                                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Pengunjung</span>
                                     <div className="flex items-baseline gap-1">
                                         <span className="text-sm font-black tabular-nums tracking-tight text-foreground">
                                             {visitorCount.toLocaleString('id-ID')}
@@ -180,7 +187,7 @@ export default function Footer({
                         © {new Date().getFullYear()} {siteConfig.name} {siteConfig.university}. Hak Cipta Dilindungi.
                     </p>
                     <div className="flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/30 dark:text-white/20">
-                        <span>Inovasi. Integritas. Keadilan.</span>
+                        <span>Designed & Developed by Jemi Arian</span>
                     </div>
                 </div>
             </div>
