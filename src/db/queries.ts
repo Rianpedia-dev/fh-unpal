@@ -170,8 +170,8 @@ export async function getFullProfile() {
     }
 
     return {
-        sejarah: map["sejarah"] ?? "",
-        visi: map["visi"] ?? "",
+        sejarah: map["sejarah"] ?? "Fakultas Hukum merupakan salah satu fakultas yang berdiri sejak awal berdirinya Universitas Palembang. Kehadiran Fakultas Hukum dilatarbelakangi oleh kebutuhan masyarakat Sumatera Selatan akan pendidikan tinggi di bidang hukum yang mampu mencetak sarjana hukum yang profesional,berintegritas, serta berwawasan kebangsaan. Secara kelembagaan, Universitas Palembang memperoleh izin pendirian berdasarkan Surat Keputusan Nomor 79/Kop.II/N.IV/82 tanggal 8 April 1982 yang ditandatangani oleh Koordinator Perguruan Tinggi Swasta Wilayah II. SK tersebut menjadi dasar hukum berdirinya Universitas Palembang sebagai perguruan tinggi swasta yang sah dan diakui. Selanjutnya, Fakultas Hukum resmi memperoleh izin pembukaan Program Studi berdasarkan Surat Keputusan Nomor 06/I/0/1985 tanggal 2 Desember 1985 yang ditandatangani oleh Sekretaris Jenderal Departemen Pendidikan dan Kebudayaan Republik Indonesia. Dengan terbitnya SK tersebut, Fakultas Hukum secara resmi menyelenggarakan pendidikan tinggi di bidang ilmu hukum.",
+        visi: map["visi"] ?? "Menjadi program studi ilmu hukum yang menghasilkan sarjana hukum profesional di bidang praktisi hukum yang mampu bersaing di masyarakat.",
         misi: (() => {
             try {
                 return JSON.parse(map["misi"] ?? "[]") as string[];
@@ -181,22 +181,22 @@ export async function getFullProfile() {
             }
         })(),
         akreditasi: {
-            grade: map["akreditasi_grade"] ?? "",
+            grade: map["akreditasi_grade"] ?? "B",
             sk: map["akreditasi_sk"] ?? "",
             validUntil: map["akreditasi_validUntil"] ?? "",
             description: map["akreditasi_description"] ?? "",
         },
-        tujuan: map["tujuan"] ?? "",
-        motto: map["motto"] ?? "",
+        tujuan: map["tujuan"] ?? "Menghasilkan lulusan ilmu hukum yang memiliki kemampuan akademik,profesional, dan berdaya saing serta mampu menerapkan teori dan praktik hukum di bidang pemerintahan maupun swasta. Lulusan juga diharapkan memiliki sikap dan perilaku yang baik serta mampu mengabdikan ilmunya untuk pengembangan ilmu hukum, profesi hukum, dan kesejahteraan masyarakat. Selain itu, menghasilkan penelitian hukum yang berkualitas dengan melibatkan mahasiswa guna mendukung penegakan hukum dan memberikan manfaat bagi masyarakat melalui kegiatan pengabdian.",
+        motto: map["motto"] ?? "Mencetak generasi ahli hukum yang berintegritas, kritis, dan siap menegakkan keadilan bagi masyarakat.",
         dekanName: map["dekan_name"] ?? "Dr. Ardiana Hidayah, S.H., M.H.",
         sambutan: map["sambutan"] ?? "Puji dan syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya, sehinggaFakultas Hukum Universitas Palembang terus berkembang dan berkontribusi dalam mencetak sumber daya manusia yang unggul di bidang hukum.Fakultas Hukum Universitas Palembang hadir sebagai bagian dari komitmen institusi dalam menyelenggarakan pendidikan tinggi yang berkualitas, profesional, dan berintegritas. Sejak berdiri,Fakultas Hukum berupaya membangun tradisi akademik yang kuat melalui pelaksanaan Tri Dharma Perguruan Tinggi, yaitu pendidikan dan pengajaran, penelitian, serta pengabdian kepada masyarakat. Kami berkomitmen untuk menghasilkan lulusan yang tidak hanya memiliki kompetensi akademik yang mumpuni, tetapi juga memiliki karakter, etika profesi, serta kepekaan sosial yang tinggi. Di tengah dinamika perkembangan hukum nasional dan global, Fakultas Hukum terus melakukan pembaruan kurikulum, peningkatan kualitas sumber daya dosen, serta penguatan kerja sama dengan berbagai lembaga pemerintah maupun swasta. Kami menyadari bahwa tantangan dunia hukum ke depan semakin kompleks. Oleh karena itu, kami mendorong seluruh civitas akademika untuk senantiasa adaptif, inovatif, dan menjunjung tinggi nilai-nilai keadilan serta supremasi hukum.Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah memberikan dukungan dan kepercayaan kepada Fakultas Hukum Universitas Palembang. Semoga ke depan, Fakultas Hukum semakin maju dan mampu memberikan kontribusi nyata bagi masyarakat, bangsa, dan negara.",
         dekanImage: map["dekan_image"] ?? "/uploads/profile/1771685156842-WhatsApp-Image-2026-02-20-at-10.46.29.jpeg",
         stats: {
-            students: map["stats_students"] ?? "0",
-            studyPrograms: map["stats_study_programs"] ?? "0",
-            partners: map["stats_partners"] ?? "0",
-            yearsStanding: map["stats_years"] ?? "0",
-            successfulAlumni: map["stats_alumni"] ?? "0",
+            students: map["stats_students"] ?? "2000",
+            studyPrograms: map["stats_study_programs"] ?? "1",
+            partners: map["stats_partners"] ?? "10",
+            yearsStanding: map["stats_years"] ?? "1985",
+            successfulAlumni: map["stats_alumni"] ?? "1000",
         }
     };
 }
