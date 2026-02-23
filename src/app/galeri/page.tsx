@@ -1,4 +1,6 @@
 import { getPublishedGalleryMedia } from '@/lib/db';
+
+export const dynamic = "force-dynamic";
 import GalleryGrid from './GalleryGrid';
 import PageHeader from '@/components/layout/page-header';
 
