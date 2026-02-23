@@ -5,9 +5,11 @@ import * as schema from "./schema";
 const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
-    console.error("❌ DATABASE_URL is not defined in environment variables!");
+    console.error("❌ CRITICAL: DATABASE_URL tidak ditemukan di process.env!");
+    console.error("Pastikan variabel sudah diatur di Panel Hostinger atau file .env di server.");
 }
 
-const poolConnection = mysql.createPool(databaseUrl || "");
+// Mencegah crash jika URL tidak valid saat inisialisasi modul
+const poolConnection = mysql.createPool(databaseUrl || "mysql://placeholder:placeholder@localhost:3306/placeholder");
 
 export const db = drizzle(poolConnection, { schema, mode: "default" });
