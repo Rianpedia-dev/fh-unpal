@@ -11,12 +11,29 @@ if (!process.env.DATABASE_URL) {
 
 const databaseUrl = process.env.DATABASE_URL;
 
-if (!databaseUrl) {
-    console.error("❌ CRITICAL: DATABASE_URL tidak ditemukan di process.env!");
-    console.error("Manual loading juga gagal.");
+// Debugging sederhana untuk melihat apakah env terbaca (hanya di console server)
+if (databaseUrl) {
+    console.log("📍 DATABASE_URL terdeteksi di server.");
+} else {
+    console.error("❌ DATABASE_URL TIDAK TERDETEKSI di server!");
 }
 
-// Mencegah crash jika URL tidak valid saat inisialisasi modul
-const poolConnection = mysql.createPool(databaseUrl || "mysql://placeholder:placeholder@localhost:3306/placeholder");
+// Gunakan placeholder yang aman agar tidak crash saat inisialisasi modul
+let poolConnection;
+try {
+    if (databaseUrl) {
+        poolConnection = mysql.createPool({
+            uri: databaseUrl,
+            connectionLimit: 1, // Hemat koneksi di shared hosting
+            connectTimeout: 5000, // Jangan biarkan aplikasi hang
+        });
+    } else {
+        // Fallback ke placeholder agar objek db tetap tercipta tapi query akan gagal dengan rapi
+        poolConnection = mysql.createPool("mysql://invalid:invalid@localhost:3306/invalid");
+    }
+} catch (err) {
+    console.error("🔥 Gagal menginisialisasi MySQL Pool:", err);
+    poolConnection = mysql.createPool("mysql://invalid:invalid@localhost:3306/invalid");
+}
 
 export const db = drizzle(poolConnection, { schema, mode: "default" });
