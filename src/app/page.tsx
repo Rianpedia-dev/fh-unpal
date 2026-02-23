@@ -61,7 +61,7 @@ export default async function Home() {
   // Data hero (Gunakan teks statis, gambar tetap dinamis dari DB)
   const heroData = {
     title: "Selamat Datang di Fakultas Hukum Universitas Palembang",
-    subtitle: "Mewujudkan generasi sarjana hukum yang unggul, berintegritas, dan berdaya saing melalui pendidikan berkualitas, inovasi akademik, serta pemanfaatan teknologi modern untuk menjawab tantangan dunia hukum di masa depan.",
+    subtitle: "Membangun generasi ahli hukum yang cerdas, berintegritas, dan berdedikasi dalam menegakkan keadilan serta menjunjung tinggi nilai-nilai hukum.",
     imageUrls: heroImages,
     buttonText: "Mulai Menjelajah",
     buttonLink: "/profil"
@@ -104,91 +104,78 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-transparent overflow-hidden relative">
-      <div className="container mx-auto px-4 pt-4 pb-8 relative z-10 text-center">
+      <div className="relative z-10">
         {/* Hero Section */}
-        <div className="relative pt-12 pb-6 md:pt-20 md:pb-32 overflow-hidden z-10">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] -z-10 animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-navy/5 rounded-full blur-[120px] -z-10"></div>
-
+        <div className="relative pt-8 pb-6 md:pt-20 md:pb-32 overflow-hidden">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-              <div className="flex flex-col text-left">
-                <MotionDiv
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="relative z-10"
-                >
-                  <h1 className="text-4xl md:text-6xl font-black mb-4 md:mb-8 leading-[1.1] tracking-tighter">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-700 to-brand-red dark:from-red-400 dark:via-red-500 dark:to-brand-red drop-shadow-[0_2px_10px_rgba(239,68,68,0.1)] dark:drop-shadow-[0_2px_20px_rgba(239,68,68,0.3)] filter brightness-110">
-                      {heroData.title}
-                    </span>
-                  </h1>
+            <div className="grid lg:grid-cols-2 gap-4 lg:gap-10 items-start">
+              <MotionDiv
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="relative z-10 text-left lg:h-auto"
+              >
+                <h1 className="text-3xl md:text-6xl font-extrabold text-white mb-8 leading-[1.1] tracking-tight">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-500 to-red-700 bg-[length:200%_auto] animate-gradient-x drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] [-webkit-text-stroke:1px_#7f1d1d]">
+                    {heroData.title}
+                  </span>
+                </h1>
 
-                  <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-12 max-w-xl leading-relaxed font-medium">
-                    {heroData.subtitle}
-                  </p>
-                </MotionDiv>
-
-                {/* desktop buttons */}
-                <div className="hidden lg:flex flex-wrap gap-5">
-                  <Button asChild size="lg" className="rounded-full px-10 h-14 font-bold bg-white text-black hover:bg-gray-200 transition-all duration-300 shadow-xl">
-                    <Link href={heroData.buttonLink || "/pmb"}>
-                      {heroData.buttonText}
-                      <ChevronRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="rounded-full px-10 h-14 font-bold border-border text-foreground hover:bg-accent transition-all duration-300">
-                    <Link href="/pmb">
-                      Pendaftaran
-                      <ChevronRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+                <p className="text-lg text-foreground/60 mb-6 max-w-xl leading-relaxed">
+                  {heroData.subtitle}
+                </p>
+              </MotionDiv>
 
               <MotionDiv
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="relative z-10"
+                className="relative z-10 lg:row-span-2"
               >
                 <div className="relative group">
-                  <div className="relative aspect-video rounded-[2.5rem] overflow-hidden border-2 border-brand-red shadow-[0_0_30px_rgba(185,28,28,0.3)] transform transition-all duration-700 hover:scale-[1.02]">
-                    <div className="absolute inset-0 border-[8px] border-brand-navy/30 pointer-events-none z-10 rounded-[2.5rem]"></div>
+                  {/* Decorative Frames & Glow */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-cyber-blue to-electric-purple rounded-2xl md:rounded-[2.6rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+
+                  <div className="relative aspect-video rounded-xl md:rounded-[2.5rem] overflow-hidden glass-card border-2 border-white/20 dark:border-white/5 shadow-[0_40px_80px_rgba(0,0,0,0.3)] dark:shadow-[0_40px_80px_rgba(0,0,0,0.6)] transform transition-all duration-700 group-hover:scale-[1.01]">
                     <HeroMediaSlider images={heroData.imageUrls} universityName={siteConfig.shortName} />
                   </div>
                 </div>
               </MotionDiv>
 
-              {/* mobile buttons - appear after media on mobile */}
-              <div className="lg:hidden grid grid-cols-2 gap-3 mt-4">
-                <Button asChild size="lg" className="rounded-full px-4 h-12 text-sm font-bold bg-white text-black hover:bg-gray-200 transition-all duration-300 shadow-xl">
-                  <Link href={heroData.buttonLink || "/pmb"}>
-                    {heroData.buttonText}
-                    <ChevronRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full px-4 h-12 text-sm font-bold border-border text-foreground hover:bg-accent transition-all duration-300">
-                  <Link href="/pmb">
-                    Pendaftaran
-                    <ChevronRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </Button>
-              </div>
+              <MotionDiv
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="relative z-10 text-left lg:col-start-1 lg:row-start-2"
+              >
+                <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3 sm:gap-4 mt-4 lg:mt-0">
+                  <Button asChild size="lg" className="w-full sm:w-auto rounded-full px-10 h-12 font-bold group shadow-2xl hover:scale-105 transition-all duration-300 bg-white text-black hover:bg-gray-200">
+                    <Link href={heroData.buttonLink || "/pmb"}>
+                      {heroData.buttonText}
+                      <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" className="w-full sm:w-auto rounded-full px-10 h-12 font-bold group shadow-2xl hover:scale-105 transition-all duration-300 bg-brand-red text-white hover:bg-red-700">
+                    <Link href="/pmb">
+                      Pendaftaran
+                      <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                </div>
+              </MotionDiv>
             </div>
           </div>
         </div>
       </div>
 
       {/* Stats Section */}
-      <div className="container mx-auto px-4 py-12 relative z-10">
+      <div className="container mx-auto px-4 pt-12 pb-12 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { icon: GraduationCap, value: `${profile.stats.yearsStanding}`, label: "Tahun Berdiri", color: "text-blue-500", bg: "bg-blue-500/10" },
-            { icon: Users, value: `${profile.stats.successfulAlumni}+`, label: "Alumni Sukses", color: "text-purple-500", bg: "bg-purple-500/10" },
+            { icon: Users, value: `${profile.stats.successfulAlumni}+`, label: "Alumni", color: "text-purple-500", bg: "bg-purple-500/10" },
             { icon: Award, value: profile.akreditasi.grade, label: "Akreditasi BAN-PT", color: "text-emerald-500", bg: "bg-emerald-500/10" },
-            { icon: BookOpen, value: `${lecturers.length}+`, label: "Dosen Pengajar", color: "text-orange-500", bg: "bg-orange-500/10" }
+            { icon: BookOpen, value: `${lecturers.length}+`, label: "Tenaga Pendidik", color: "text-orange-500", bg: "bg-orange-500/10" }
           ].map((stat, i) => (
             <MotionDiv
               key={i}
@@ -209,7 +196,7 @@ export default async function Home() {
       </div>
 
       {/* Sambutan Section */}
-      <div className="container mx-auto px-4 py-32 relative z-10">
+      <div className="container mx-auto px-4 pt-12 pb-20 relative z-10">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           {/* Section Title */}
           <MotionDiv
@@ -256,33 +243,33 @@ export default async function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full"
           >
-            <div className="relative pt-24 pb-16 px-8 md:px-20 rounded-[3rem] overflow-hidden bg-card/50 backdrop-blur-xl border border-brand-red shadow-[0_0_40px_rgba(185,28,28,0.2)] dark:shadow-[0_40px_80px_rgba(0,0,0,0.4)]">
+            <div className="relative pt-20 pb-12 px-6 md:pt-24 md:pb-16 md:px-20 rounded-[2.5rem] md:rounded-[3.rem] overflow-hidden bg-card/50 backdrop-blur-xl border border-brand-red shadow-[0_0_40px_rgba(185,28,28,0.2)] dark:shadow-[0_40px_80px_rgba(0,0,0,0.4)]">
               {/* Grid Pattern Overlay */}
               <div className="absolute inset-0 pattern-grid opacity-[0.03] dark:opacity-10"></div>
 
-              {/* Quote Icons */}
-              <Quote className="absolute top-12 left-12 w-12 h-12 text-muted-foreground/10 rotate-180" />
-              <Quote className="absolute bottom-12 right-12 w-12 h-12 text-muted-foreground/10" />
+              {/* Quote Icons - Adjusted for mobile */}
+              <Quote className="absolute top-8 left-6 w-8 h-8 md:top-12 md:left-12 md:w-12 md:h-12 text-muted-foreground/10 rotate-180" />
+              <Quote className="absolute bottom-8 right-6 w-8 h-8 md:bottom-12 md:right-12 md:w-12 md:h-12 text-muted-foreground/10" />
 
-              <div className="relative z-10 text-center space-y-8">
-                <p className="text-lg md:text-xl font-bold text-foreground italic">
+              <div className="relative z-10 text-left space-y-6 md:space-y-8">
+                <p className="text-base md:text-xl font-bold text-foreground italic">
                   Assalamualaikum Wr. Wb.
                 </p>
 
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto whitespace-pre-wrap">
+                <p className="text-sm md:text-lg text-muted-foreground leading-relaxed max-w-2xl mr-auto whitespace-pre-wrap text-left">
                   {profile.sambutan || "Selamat datang di website resmi Fakultas Hukum Universitas Palembang."}
                 </p>
 
-                <p className="text-lg md:text-xl font-bold text-foreground italic">
+                <p className="text-base md:text-xl font-bold text-foreground italic">
                   Wassalamualaikum Wr. Wb.
                 </p>
 
-                <div className="pt-8 space-y-2">
-                  <p className="text-sm font-bold text-brand-red uppercase tracking-[0.2em] mb-2">Hormat Kami,</p>
-                  <h4 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-wide">
+                <div className="pt-4 md:pt-8 space-y-2">
+                  <p className="text-[10px] md:text-sm font-bold text-brand-red uppercase tracking-[0.2em] mb-1 md:mb-2">Hormat Kami,</p>
+                  <h4 className="text-xl md:text-3xl font-extrabold text-foreground tracking-wide">
                     {profile.dekanName}
                   </h4>
-                  <p className="text-brand-red font-bold uppercase tracking-[0.3em] text-xs md:text-sm">
+                  <p className="text-brand-red font-bold uppercase tracking-[0.3em] text-[10px] md:text-sm">
                     Dekan Fakultas Hukum
                   </p>
                 </div>
@@ -296,7 +283,7 @@ export default async function Home() {
       <HomeNewsSection latestNews={latestNews} locale="id" />
 
       {/* Testimonials */}
-      <div className="container mx-auto px-4 py-24 relative z-10 overflow-hidden">
+      <div className="container mx-auto px-4 py-16 relative z-10 overflow-hidden">
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -311,7 +298,7 @@ export default async function Home() {
       </div>
 
       {/* Partners section */}
-      <div className="container mx-auto px-4 py-24 relative z-10 mb-12">
+      <div className="container mx-auto px-4 py-16 relative z-10 mb-8">
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

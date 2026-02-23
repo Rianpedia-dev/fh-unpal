@@ -20,7 +20,7 @@ interface SiteConfig {
 
 interface ProfileData {
     sejarah: string; visi: string; misi: string[];
-    tujuan: string;
+    tujuan: string; motto: string;
     akreditasi: { grade: string; sk: string; validUntil: string; description: string; };
     dekanName: string;
     sambutan: string; dekanImage?: string;
@@ -76,7 +76,7 @@ export default function SettingsClient({
                 setDekanFile(null);
             }
 
-            const profileFields = ["sejarah", "visi", "tujuan", "dekan_name", "akreditasi_grade", "akreditasi_sk", "akreditasi_validUntil", "akreditasi_description", "sambutan", "stats_students", "stats_study_programs", "stats_partners", "stats_years", "stats_alumni"];
+            const profileFields = ["sejarah", "visi", "tujuan", "motto", "dekan_name", "akreditasi_grade", "akreditasi_sk", "akreditasi_validUntil", "akreditasi_description", "sambutan", "stats_students", "stats_study_programs", "stats_partners", "stats_years", "stats_alumni"];
             for (const key of profileFields) {
                 const value = formData.get(key) as string ?? "";
                 // Handle stats fields with default "0"
@@ -222,7 +222,10 @@ export default function SettingsClient({
                                     </div>
                                 </div>
                                 <div><Label>Sambutan Dekan</Label><Textarea name="sambutan" rows={5} defaultValue={profile.sambutan} /></div>
-                                <div><Label>Tujuan</Label><Textarea name="tujuan" rows={5} defaultValue={profile.tujuan} placeholder="Masukkan tujuan fakultas/universitas..." /></div>
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div><Label>Tujuan</Label><Textarea name="tujuan" rows={5} defaultValue={profile.tujuan} placeholder="Masukkan tujuan fakultas/universitas..." /></div>
+                                    <div><Label>Motto Fakultas</Label><Textarea name="motto" rows={5} defaultValue={profile.motto} placeholder="Masukkan motto fakultas..." /></div>
+                                </div>
 
                                 <h4 className="font-semibold">Statistik Kampus (Halaman Profil)</h4>
                                 <div className="grid md:grid-cols-3 gap-4 p-4 border rounded-xl bg-muted/30">

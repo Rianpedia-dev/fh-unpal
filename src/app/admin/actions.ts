@@ -5,6 +5,7 @@ import * as schema from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { saveFile, deleteFile } from "@/lib/upload-utils";
+import { createSuperAdmin } from "@/lib/admin-init";
 
 export async function uploadImageAction(formData: FormData) {
     const file = formData.get("file") as File;
@@ -530,6 +531,7 @@ export async function upsertSiteConfig(key: string, value: string) {
         await db.insert(schema.siteConfig).values({ key, value });
     }
     revalidatePath("/admin/settings");
+    revalidatePath("/profil");
     revalidatePath("/");
 }
 
@@ -552,4 +554,18 @@ export async function upsertProfile(key: string, value: string) {
     revalidatePath("/admin/settings");
     revalidatePath("/profil");
     revalidatePath("/");
+}
+
+// ============================================================
+// ADMIN SETUP
+// ============================================================
+export async function resetViewsAction() {
+    const { resetViews } = await import("@/db/queries");
+    await resetViews();
+    revalidatePath("/");
+    revalidatePath("/admin");
+}
+
+export async function setupInitialSuperAdmin() {
+    return await createSuperAdmin();
 }

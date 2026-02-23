@@ -51,6 +51,9 @@
   --color-brand-navy: #0c1a3a;
   --color-brand-navy-light: #1e3a5f;
   --color-brand-gold: #d4a843;
+  /* Cyberpunk design tokens */
+  --color-cyber-blue: #00eeff;
+  --color-electric-purple: #bc13fe;
 }
 
 :root {

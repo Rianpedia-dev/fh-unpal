@@ -144,7 +144,7 @@ export async function getPublishedUniversityProfile() {
             values: "Integritas, Inovasi, Kolaborasi, Unggul",
             history: profile.sejarah || "",
             logo: "/images/logo_univ.png",
-            motto: siteConfig.description || "",
+            motto: profile.motto || "",
             establishedYear: 1960,
             accreditation: profile.akreditasi.grade || "B",
         }];

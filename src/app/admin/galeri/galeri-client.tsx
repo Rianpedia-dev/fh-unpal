@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -81,7 +80,6 @@ export default function GaleriClient({ data }: { data: GalleryItem[] }) {
 
             const payload = {
                 title: formData.get("title") as string,
-                description: formData.get("description") as string || undefined,
                 filePath: filePath,
                 thumbnailPath: thumbnailPath || undefined,
                 mediaType: mediaType,
@@ -194,16 +192,6 @@ export default function GaleriClient({ data }: { data: GalleryItem[] }) {
                                         />
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label>Deskripsi</Label>
-                                        <Textarea
-                                            name="description"
-                                            rows={3}
-                                            defaultValue={editing?.description ?? ""}
-                                            placeholder="Keterangan singkat..."
-                                            className="bg-muted/50 border-brand-red/10 focus:border-brand-red/50 transition-colors"
-                                        />
-                                    </div>
 
                                     <div className="p-4 rounded-xl bg-muted/30 border border-brand-red/5">
                                         <div className="space-y-3">

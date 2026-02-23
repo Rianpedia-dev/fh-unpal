@@ -27,10 +27,24 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
         <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex -ml-4 md:-ml-8">
                 {testimonials.map((testimonial) => (
-                    <div key={testimonial.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 md:pl-8 py-4">
-                        <Card className="h-full glass-card border border-brand-red shadow-[0_0_15px_rgba(185,28,28,0.2)] hover:border-brand-red/80 transition-all duration-500 shadow-sm hover:shadow-2xl">
-                            <CardContent className="p-8 flex flex-col h-full relative overflow-hidden">
-                                <Quote className="absolute -top-4 -right-4 w-24 h-24 text-foreground/5 opacity-10" />
+                    <div key={testimonial.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 md:pl-8 py-10">
+                        <Card className="h-full bg-[#1A1A1A] border-none shadow-2xl relative pt-12 rounded-[2rem]">
+                            <CardContent className="p-8 flex flex-col h-full items-center text-center">
+                                {/* Overlapping Avatar */}
+                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-4 border-[#1A1A1A] overflow-hidden bg-muted shadow-xl">
+                                    {testimonial.image ? (
+                                        <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center bg-brand-red text-white font-bold text-2xl">
+                                            {testimonial.name.charAt(0)}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="space-y-1 mb-4">
+                                    <h4 className="font-bold text-white text-lg tracking-wide uppercase">{testimonial.name}</h4>
+                                    <p className="text-brand-red font-bold text-[10px] tracking-[0.2em] uppercase">{testimonial.role}</p>
+                                </div>
 
                                 <div className="flex gap-1 mb-6">
                                     {Array.from({ length: 5 }).map((_, i) => (
@@ -38,30 +52,18 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
                                             key={i}
                                             className={cn(
                                                 "w-4 h-4",
-                                                i < testimonial.rating ? "fill-brand-gold text-brand-gold" : "text-muted-foreground"
+                                                i < testimonial.rating ? "fill-brand-gold text-brand-gold" : "text-white/10"
                                             )}
                                         />
                                     ))}
                                 </div>
 
-                                <p className="text-foreground/80 leading-relaxed mb-8 relative z-10 italic">
-                                    "{testimonial.content}"
-                                </p>
-
-                                <div className="mt-auto flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-muted border border-border">
-                                        {testimonial.image ? (
-                                            <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center bg-brand-navy text-white font-bold">
-                                                {testimonial.name.charAt(0)}
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-foreground text-sm">{testimonial.name}</h4>
-                                        <p className="text-muted-foreground text-xs">{testimonial.role}</p>
-                                    </div>
+                                <div className="relative">
+                                    <Quote className="absolute -top-2 -left-4 w-6 h-6 text-white/5 rotate-180" />
+                                    <p className="text-white/80 leading-relaxed text-sm relative z-10 italic">
+                                        {testimonial.content}
+                                    </p>
+                                    <Quote className="absolute -bottom-2 -right-4 w-6 h-6 text-white/5" />
                                 </div>
                             </CardContent>
                         </Card>

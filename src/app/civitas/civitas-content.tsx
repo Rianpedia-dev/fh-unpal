@@ -101,7 +101,7 @@ export default function CivitasContent({
                                 </div>
 
                                 {/* Name */}
-                                <h3 className="text-foreground font-bold text-sm md:text-lg mb-1 md:mb-2 leading-snug line-clamp-2">
+                                <h3 className="text-foreground font-bold text-sm md:text-lg mb-1 md:mb-2 leading-snug">
                                     {dosen.name}
                                 </h3>
 
@@ -118,24 +118,24 @@ export default function CivitasContent({
                                 </p>
 
                                 {/* Details List */}
-                                <div className="space-y-2 border-t border-border pt-4 mt-2">
+                                <div className="space-y-2 border-t border-border pt-4 mt-2 text-left">
                                     {/* Specialization */}
-                                    <div className="flex items-center justify-center gap-1.5 text-muted-foreground/90 text-[10px] md:text-xs">
-                                        <Search className="w-3 h-3 shrink-0" />
-                                        <p className="line-clamp-1">{dosen.specialization}</p>
+                                    <div className="flex items-start justify-start gap-1.5 text-muted-foreground/90 text-[10px] md:text-xs">
+                                        <Search className="w-3 h-3 shrink-0 mt-0.5" />
+                                        <p className="md:line-clamp-1">{dosen.specialization}</p>
                                     </div>
 
                                     {/* Education */}
-                                    <div className="flex items-center justify-center gap-1.5 text-muted-foreground/90 text-[10px] md:text-xs">
-                                        <GraduationCap className="w-3 h-3 shrink-0" />
-                                        <p className="line-clamp-1">{dosen.education}</p>
+                                    <div className="flex items-start justify-start gap-1.5 text-muted-foreground/90 text-[10px] md:text-xs">
+                                        <GraduationCap className="w-3 h-3 shrink-0 mt-0.5" />
+                                        <p className="md:line-clamp-1">{dosen.education}</p>
                                     </div>
 
                                     {/* Email */}
                                     {dosen.email && (
-                                        <div className="flex items-center justify-center gap-1.5 text-brand-red/80 text-[10px] md:text-xs font-medium">
-                                            <Mail className="w-3 h-3 shrink-0" />
-                                            <p className="line-clamp-1">{dosen.email}</p>
+                                        <div className="flex items-start justify-start gap-1.5 text-brand-red/80 text-[10px] md:text-xs font-medium">
+                                            <Mail className="w-3 h-3 shrink-0 mt-0.5" />
+                                            <p className="break-all md:line-clamp-1">{dosen.email}</p>
                                         </div>
                                     )}
                                 </div>

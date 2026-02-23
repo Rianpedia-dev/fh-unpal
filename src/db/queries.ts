@@ -187,6 +187,7 @@ export async function getFullProfile() {
             description: map["akreditasi_description"] ?? "",
         },
         tujuan: map["tujuan"] ?? "",
+        motto: map["motto"] ?? "",
         dekanName: map["dekan_name"] ?? "Dr. Ali Dahwir, S.H., M.H.",
         sambutan: map["sambutan"] ?? "",
         dekanImage: map["dekan_image"] ?? "",
@@ -337,6 +338,17 @@ export async function getViews(): Promise<number> {
         return 0;
     }
 }
+
+export async function resetViews() {
+    try {
+        return await db.update(schema.siteStats)
+            .set({ views: 0 })
+            .where(eq(schema.siteStats.id, 1));
+    } catch (e) {
+        throw new Error("Gagal mereset jumlah pengunjung");
+    }
+}
+
 
 // ============================================================
 // TESTIMONIALS (Testimoni Alumni)

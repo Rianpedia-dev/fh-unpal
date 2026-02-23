@@ -1,4 +1,5 @@
 import { getDashboardCounts, getViews } from "@/db/queries";
+import { ResetVisitorButton } from "./ResetVisitorButton";
 import {
     Newspaper,
     GraduationCap,
@@ -35,10 +36,11 @@ export default async function AdminDashboard() {
                 {stats.map((stat) => (
                     <Card key={stat.label} className="border-border hover:border-brand-red hover:shadow-[0_0_20px_rgba(185,28,28,0.2)] transition-all duration-300">
                         <CardContent className="p-5">
-                            <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center justify-between gap-3 mb-3">
                                 <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center`}>
                                     <stat.icon className={`w-5 h-5 ${stat.color}`} />
                                 </div>
+                                {stat.label === "Pengunjung" && <ResetVisitorButton />}
                             </div>
                             <p className="text-2xl font-bold text-foreground">{stat.value}</p>
                             <p className="text-xs text-muted-foreground font-medium mt-0.5">{stat.label}</p>

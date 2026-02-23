@@ -91,26 +91,26 @@ export default async function PMBPage({ params }: { params: Promise<{ locale: st
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 whileHover={{ y: -8 }}
-                                className="glass-card p-8 md:p-10 rounded-[2.5rem] border border-brand-red shadow-[0_0_20px_rgba(185,28,28,0.2)] group cursor-default relative overflow-hidden"
+                                className="glass-card p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-brand-red shadow-[0_0_20px_rgba(185,28,28,0.2)] group cursor-default relative overflow-hidden"
                             >
                                 {/* Glow accent */}
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-cyber-blue/5 blur-3xl rounded-full group-hover:bg-cyber-blue/10 transition-all duration-500"></div>
 
-                                <div className="relative z-10 space-y-5">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-14 h-14 rounded-2xl bg-cyber-blue/10 flex items-center justify-center border border-cyber-blue/20 flex-shrink-0 group-hover:bg-cyber-blue/20 transition-all duration-300">
+                                <div className="relative z-10 space-y-4 md:space-y-5">
+                                    <div className="flex items-start gap-3 md:gap-4">
+                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-cyber-blue/10 flex items-center justify-center border border-cyber-blue/20 flex-shrink-0 group-hover:bg-cyber-blue/20 transition-all duration-300">
                                             {track.id === 'murni'
-                                                ? <GraduationCap className="w-7 h-7 text-cyber-blue" />
-                                                : <RefreshCw className="w-7 h-7 text-cyan-400" />
+                                                ? <GraduationCap className="w-6 h-6 md:w-7 md:h-7 text-cyber-blue" />
+                                                : <RefreshCw className="w-6 h-6 md:w-7 md:h-7 text-cyan-400" />
                                             }
                                         </div>
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-1">
-                                                <h3 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60 transition-all duration-300 group-hover:from-cyber-blue group-hover:to-cyan-400">
+                                        <div className="flex-1">
+                                            <div className="flex flex-wrap items-center gap-2 mb-1">
+                                                <h3 className="text-xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60 transition-all duration-300 group-hover:from-cyber-blue group-hover:to-cyan-400">
                                                     {track.title}
                                                 </h3>
                                                 {track.id === 'murni' && (
-                                                    <Badge className="bg-amber-500/15 text-amber-400 border-amber-500/20 text-[10px] font-bold tracking-wider uppercase">
+                                                    <Badge className="bg-amber-500/15 text-amber-400 border-amber-500/20 text-[9px] md:text-[10px] font-bold tracking-wider uppercase h-5">
                                                         Populer
                                                     </Badge>
                                                 )}
@@ -118,7 +118,7 @@ export default async function PMBPage({ params }: { params: Promise<{ locale: st
                                             <div className="w-12 h-1 bg-cyber-blue/30 rounded-full group-hover:w-full group-hover:bg-cyber-blue transition-all duration-500"></div>
                                         </div>
                                     </div>
-                                    <p className="text-muted-foreground leading-relaxed text-sm md:text-base pl-[72px]">
+                                    <p className="text-muted-foreground leading-relaxed text-sm md:text-base md:pl-[72px]">
                                         {track.description}
                                     </p>
                                 </div>
@@ -146,19 +146,19 @@ export default async function PMBPage({ params }: { params: Promise<{ locale: st
                                 transition={{ delay: i * 0.1 }}
                                 viewport={{ once: true }}
                                 whileHover={{ y: -8 }}
-                                className="glass-card p-8 rounded-[2.5rem] border border-brand-red shadow-[0_0_20px_rgba(185,28,28,0.2)] group h-full relative overflow-hidden"
+                                className="glass-card p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-brand-red shadow-[0_0_20px_rgba(185,28,28,0.2)] group h-full relative overflow-hidden"
                             >
                                 {/* Active Accent Bar */}
                                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-16 bg-cyber-blue rounded-r-full group-hover:h-32 transition-all duration-500 shadow-[0_0_20px_rgba(0,240,255,0.8)]"></div>
 
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-14 h-14 rounded-2xl bg-foreground/5 flex items-center justify-center border border-foreground/10 group-hover:bg-cyber-blue/10 group-hover:border-cyber-blue/40 transition-all duration-300">
-                                            {item.icon === 'sun' ? <Sun className="w-7 h-7 text-cyber-blue" /> : <Briefcase className="w-7 h-7 text-cyber-blue" />}
+                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-foreground/5 flex items-center justify-center border border-foreground/10 group-hover:bg-cyber-blue/10 group-hover:border-cyber-blue/40 transition-all duration-300">
+                                            {item.icon === 'sun' ? <Sun className="w-6 h-6 md:w-7 md:h-7 text-cyber-blue" /> : <Briefcase className="w-6 h-6 md:w-7 md:h-7 text-cyber-blue" />}
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold">{item.title}</h3>
-                                            <Badge variant="secondary" className="bg-foreground/5 text-foreground/60 text-[10px] uppercase tracking-wider h-5 flex items-center px-2">
+                                            <h3 className="text-lg md:text-xl font-bold">{item.title}</h3>
+                                            <Badge variant="secondary" className="bg-foreground/5 text-foreground/60 text-[9px] md:text-[10px] uppercase tracking-wider h-5 flex items-center px-2">
                                                 {item.type}
                                             </Badge>
                                         </div>
@@ -406,7 +406,7 @@ export default async function PMBPage({ params }: { params: Promise<{ locale: st
                         subtitle="Hubungi tim kami untuk mendapatkan informasi lebih lanjut mengenai pendaftaran"
                     />
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 max-w-5xl mx-auto">
                         {pmbData.team.map((member, i) => (
                             <TeamMemberCard key={member.name} member={member} delay={i * 0.1} />
                         ))}

@@ -51,7 +51,7 @@ export default function GalleryGrid({ mediaItems }: { mediaItems: MediaItem[] })
         <>
             {/* Category filter removed */}
 
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 mb-16">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 items-start mb-16">
                 {filteredItems.length > 0 ? (
                     filteredItems.slice(0, visibleItems).map((media, index) => {
                         const videoId = media.mediaType === 'video' ? getYouTubeId(media.filePath) : null;
@@ -62,15 +62,12 @@ export default function GalleryGrid({ mediaItems }: { mediaItems: MediaItem[] })
                         return (
                             <MotionDiv
                                 key={media.id || index}
-                                className="glass-card rounded-[2rem] overflow-hidden border border-white/10 group cursor-pointer hover:shadow-[0_0_40px_rgba(0,240,255,0.2)] transition-all relative"
+                                className="glass-card rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border border-brand-red/20 group cursor-pointer hover:shadow-[0_0_40px_rgba(185,28,28,0.2)] transition-all relative"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: Math.min(index * 0.05, 0.5) }}
                                 onClick={() => setSelectedMedia(media)}
                             >
-                                {/* Emblem Aksentuasi */}
-                                <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-16 rounded-r-full z-20 transition-all duration-300 ${media.mediaType === 'video' ? 'bg-electric-purple shadow-[0_0_15px_rgba(191,0,255,0.8)]' : 'bg-cyber-blue shadow-[0_0_15px_rgba(0,240,255,0.8)]'
-                                    } group-hover:h-32`} />
 
                                 <div className="relative h-44 sm:h-72 overflow-hidden">
                                     <Image
@@ -103,18 +100,15 @@ export default function GalleryGrid({ mediaItems }: { mediaItems: MediaItem[] })
                                         </div>
                                     </div>
                                 </div>
-                                <div className="p-4 sm:p-8">
-                                    <h3 className="text-lg sm:text-2xl font-bold text-foreground mb-3 group-hover:text-cyber-blue transition-colors break-words">
+                                <div className="p-3 sm:p-5 flex flex-col">
+                                    <h3 className="text-[13px] sm:text-lg font-bold text-foreground mb-1.5 sm:mb-2 group-hover:text-cyber-blue transition-colors flex items-center leading-tight">
                                         {media.title}
                                     </h3>
-                                    <p className="text-muted-foreground text-xs sm:text-sm line-clamp-2 mb-4 sm:mb-6 hidden sm:block">
-                                        {media.description || "Dokumentasi kegiatan kampus."}
-                                    </p>
-                                    <div className="flex items-center justify-between gap-2">
-                                        <Badge variant="secondary" className="bg-foreground/5 text-foreground/60 border-none font-bold text-[8px] sm:text-xs">
+                                    <div className="flex items-center justify-between gap-2 mt-2">
+                                        <Badge variant="secondary" className="bg-foreground/5 text-foreground/60 border-none font-bold text-[7px] sm:text-xs px-1.5 sm:px-2.5">
                                             {media.mediaType === 'video' ? 'VIDEO' : 'FOTO'}
                                         </Badge>
-                                        <Button variant="default" className="rounded-full h-7 sm:h-9 px-3 sm:px-5 text-[10px] sm:text-xs font-bold shadow-md hover:scale-105 transition-all duration-300">
+                                        <Button variant="default" className="rounded-full h-6 sm:h-9 px-2.5 sm:px-5 text-[9px] sm:text-xs font-bold shadow-md hover:scale-105 transition-all duration-300">
                                             Detail
                                         </Button>
                                     </div>
@@ -154,10 +148,10 @@ export default function GalleryGrid({ mediaItems }: { mediaItems: MediaItem[] })
                         <Button
                             variant="secondary"
                             size="icon"
-                            className="fixed lg:absolute -top-12 lg:-top-2 lg:-right-12 z-[100] rounded-full w-10 h-10 shadow-2xl hover:scale-110 transition-all duration-300 pointer-events-auto border border-white/20"
+                            className="fixed lg:absolute -top-14 lg:-top-4 lg:-right-14 z-[100] rounded-full w-12 h-12 shadow-2xl hover:scale-110 transition-all duration-300 pointer-events-auto border border-red-500/50 bg-red-500/20 text-red-500 hover:bg-red-500/30 hover:text-red-400"
                             onClick={() => setSelectedMedia(null)}
                         >
-                            <X className="w-5 h-5" />
+                            <X className="w-7 h-7" />
                         </Button>
 
                         {/* Media Section - Full Width Minimalist */}
