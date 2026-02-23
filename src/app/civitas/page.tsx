@@ -1,4 +1,6 @@
 import { getLecturers } from "@/db/queries";
+
+export const dynamic = "force-dynamic";
 import CivitasContent from "./civitas-content";
 import type { Metadata } from "next";
 

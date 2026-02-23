@@ -1,4 +1,6 @@
 import { db } from "@/db";
+
+export const dynamic = "force-dynamic";
 import { announcements } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import PageHeader from "@/components/layout/page-header";
