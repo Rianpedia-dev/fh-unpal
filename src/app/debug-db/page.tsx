@@ -24,7 +24,13 @@ export default async function DebugPage() {
 
     } catch (e: any) {
         status = "❌ Connection Failed";
-        dbInfo = "Error Koneksi: " + e.message;
+        dbInfo = JSON.stringify({
+            message: e.message,
+            code: e.code,
+            errno: e.errno,
+            syscall: e.syscall,
+            hostname: e.hostname
+        }, null, 2);
     }
 
     return (
