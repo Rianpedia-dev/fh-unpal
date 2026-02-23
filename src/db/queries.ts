@@ -188,9 +188,9 @@ export async function getFullProfile() {
         },
         tujuan: map["tujuan"] ?? "",
         motto: map["motto"] ?? "",
-        dekanName: map["dekan_name"] ?? "Dr. Ali Dahwir, S.H., M.H.",
-        sambutan: map["sambutan"] ?? "",
-        dekanImage: map["dekan_image"] ?? "",
+        dekanName: map["dekan_name"] ?? "Dr. Ardiana Hidayah, S.H., M.H.",
+        sambutan: map["sambutan"] ?? "Puji dan syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas rahmat dan karunia-Nya, sehinggaFakultas Hukum Universitas Palembang terus berkembang dan berkontribusi dalam mencetak sumber daya manusia yang unggul di bidang hukum.Fakultas Hukum Universitas Palembang hadir sebagai bagian dari komitmen institusi dalam menyelenggarakan pendidikan tinggi yang berkualitas, profesional, dan berintegritas. Sejak berdiri,Fakultas Hukum berupaya membangun tradisi akademik yang kuat melalui pelaksanaan Tri Dharma Perguruan Tinggi, yaitu pendidikan dan pengajaran, penelitian, serta pengabdian kepada masyarakat. Kami berkomitmen untuk menghasilkan lulusan yang tidak hanya memiliki kompetensi akademik yang mumpuni, tetapi juga memiliki karakter, etika profesi, serta kepekaan sosial yang tinggi. Di tengah dinamika perkembangan hukum nasional dan global, Fakultas Hukum terus melakukan pembaruan kurikulum, peningkatan kualitas sumber daya dosen, serta penguatan kerja sama dengan berbagai lembaga pemerintah maupun swasta. Kami menyadari bahwa tantangan dunia hukum ke depan semakin kompleks. Oleh karena itu, kami mendorong seluruh civitas akademika untuk senantiasa adaptif, inovatif, dan menjunjung tinggi nilai-nilai keadilan serta supremasi hukum.Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah memberikan dukungan dan kepercayaan kepada Fakultas Hukum Universitas Palembang. Semoga ke depan, Fakultas Hukum semakin maju dan mampu memberikan kontribusi nyata bagi masyarakat, bangsa, dan negara.",
+        dekanImage: map["dekan_image"] ?? "/uploads/profile/1771685156842-WhatsApp-Image-2026-02-20-at-10.46.29.jpeg",
         stats: {
             students: map["stats_students"] ?? "0",
             studyPrograms: map["stats_study_programs"] ?? "0",
