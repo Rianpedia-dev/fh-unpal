@@ -18,6 +18,10 @@ export default async function DebugPage() {
         try {
             const [data]: any = await db.execute(sql`SELECT * FROM profile LIMIT 1`);
             sampleData = JSON.stringify(data, null, 2);
+
+            // Tambahan: Cek jumlah tabel
+            const [tables]: any = await db.execute(sql`SHOW TABLES`);
+            status += ` (${tables.length} Tables Detected)`;
         } catch (dataErr: any) {
             sampleData = "Gagal mengambil data contoh: " + dataErr.message;
         }

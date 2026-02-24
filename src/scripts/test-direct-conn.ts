@@ -19,7 +19,7 @@ async function testDirect() {
             port: 3306
         });
 
-        console.log("✅ Direct connection SUCCESSFUL!");
+        console.log("✅ Direct connection SUCCESSFULl!");
         await connection.end();
     } catch (error: any) {
         console.error("❌ Direct connection FAILED!");
